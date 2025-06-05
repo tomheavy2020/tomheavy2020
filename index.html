@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTV Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0a0a23;
+            --secondary-color: #1b1b32;
+            --accent-color: #f0a500;
+            --text-color: #f5f6f7;
+            --border-color: #3b3b4f;
+            --card-bg: #2a2a40;
+            --card-hover: #3b3b4f;
+            --sidebar-width: 280px;
+            --header-height: 70px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--secondary-color);
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: width 0.3s ease;
+        }
+
+        #sidebar.collapsed {
+            width: 80px;
+            padding: 20px 10px;
+        }
+
+        #sidebar.collapsed .sidebar-item-text,
+        #sidebar.collapsed #searchChannel,
+        #sidebar.collapsed #categoryFilter,
+        #sidebar.collapsed #uploadM3UButton,
+        #sidebar.collapsed #favoritesButton,
+        #sidebar.collapsed #epgButton,
+        #sidebar.collapsed .form-select,
+        #sidebar.collapsed .btn-primary,
+        #sidebar.collapsed .btn-secondary,
+        #sidebar.collapsed .btn-warning,
+        #sidebar.collapsed h5 {
+            display: none;
+        }
+
+        #sidebar.collapsed .sidebar-item i {
+            font-size: 1.5rem; /* Aumenta o tamanho do ícone quando colapsado */
+            margin-bottom: 10px; /* Adiciona espaço abaixo do ícone */
+        }
+
+        #sidebar.collapsed .sidebar-item {
+            justify-content: center; /* Centraliza o ícone */
+        }
+
+        #sidebarToggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            align-self: flex-end; /* Alinha o botão à direita dentro do sidebar */
+            margin-bottom: 10px;
+        }
+
+        #sidebarToggle:hover {
+            color: var(--accent-color);
+        }
+
+        #main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--primary-color);
+        }
+
+        #player-container {
+            width: 100%;
+            position: relative;
+            background-color: #000;
+            flex-grow: 1; /* Faz o player ocupar o espaço disponível */
+            display: flex; /* Permite centralizar o video-js */
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+        }
+
+        #videoPlayer {
+            width: 100%;
+            height: 100%;
+            max-height: calc(100vh - var(--header-height) - 20px); /* Ajusta altura máxima com header e padding */
+        }
+
+        #channel-info-bar {
+            background-color: var(--secondary-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            min-height: var(--header-height); /* Garante altura mínima */
+        }
+
+        #channel-details {
+            display: flex;
+            align-items: center;
+        }
+
+        #channelAvatar {
+            font-size: 2rem;
+            margin-right: 15px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        #currentChannelName {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        #currentChannelCategory {
+            font-size: 0.9rem;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        .live-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 10px;
+            animation: pulse 1.5s infinite;
+            display: none; /* Escondido por padrão */
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        #controls button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        #controls button:hover {
+            color: var(--accent-color);
+        }
+
+        #channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1; /* Ocupa espaço restante no sidebar */
+            max-height: calc(100vh - 250px); /* Ajuste conforme necessidade */
+        }
+
+        .channel-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px; /* Altura mínima para consistência */
+        }
+
+        .channel-card:hover {
+            background-color: var(--card-hover);
+            transform: translateY(-5px);
+        }
+        .channel-card.active-channel {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        .channel-card.active-channel .channel-name,
+        .channel-card.active-channel .channel-category-badge {
+            color: var(--primary-color);
+        }
+
+        .channel-card.active-channel .channel-category-badge {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+        }
+
+        .channel-logo {
+            width: 50px; /* Tamanho do logo */
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 5px; /* Borda arredondada para logos */
+        }
+        .channel-card-placeholder-logo {
+            font-size: 2rem; /* Tamanho do ícone de placeholder */
+            margin-bottom: 10px;
+            color: var(--accent-color); /* Cor do ícone */
+        }
+
+        .channel-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .channel-category-badge {
+            font-size: 0.75rem;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        #searchChannel, #categoryFilter {
+            margin-bottom: 15px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        #searchChannel::placeholder { color: var(--text-color_placeholder); } /* Cor do placeholder */
+
+
+        /* Estilos para a barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f0a500cc; /* Um pouco mais escuro no hover */
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        .modal-header, .modal-footer {
+            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+        }
+        .modal-title {
+            color: var(--accent-color);
+        }
+        .form-label { color: var(--text-color); }
+        .form-control {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        .form-control:focus {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(240, 165, 0, 0.25);
+        }
+
+        /* Notificações */
+        .notification-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1055; /* Acima de outros elementos */
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: .25rem;
+            padding: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+            min-width: 250px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .notification-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .notification-toast.info { border-left: 5px solid #0dcaf0; }
+        .notification-toast.success { border-left: 5px solid #198754; }
+        .notification-toast.error { border-left: 5px solid #dc3545; }
+
+        /* EPG Modal */
+        #epgModal .modal-dialog {
+            max-width: 80%; /* Modal maior para EPG */
+        }
+        #epgList {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .epg-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .epg-item h5 { color: var(--accent-color); }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .sidebar-item:hover {
+            background-color: var(--card-hover);
+        }
+        .sidebar-item i {
+            margin-right: 10px;
+            width: 20px; /* Largura fixa para o ícone */
+            text-align: center;
+        }
+        /* Estilos para o botão de upload e outros botões no sidebar */
+        #sidebar .btn {
+            width: 100%; /* Faz os botões ocuparem a largura total */
+            margin-bottom: 10px; /* Espaçamento entre botões */
+            display: flex; /* Para alinhar ícone e texto */
+            align-items: center; /* Alinha verticalmente */
+            justify-content: flex-start; /* Alinha conteúdo à esquerda */
+            padding: 10px; /* Padding interno */
+        }
+
+        #sidebar .btn i {
+            margin-right: 8px; /* Espaço entre ícone e texto */
+        }
+
+        /* Para o input de arquivo personalizado */
+        #m3uFile {
+            display: none; /* Esconde o input original */
+        }
+        #uploadM3UButton {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+        #uploadM3UButton:hover {
+            background-color: #d89200; /* Um tom mais escuro para hover */
+            border-color: #d89200;
+        }
+        #favoritesButton, #epgButton {
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+        #favoritesButton:hover, #epgButton:hover {
+            background-color: var(--card-hover);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="sidebar">
+        <button id="sidebarToggle"><i class="fas fa-bars"></i></button>
+        <h5 class="mt-3 mb-3 sidebar-item-text">Canais</h5>
+        <input type="text" id="searchChannel" class="form-control mb-2" placeholder="Buscar canal...">
+
+        <select id="categoryFilter" class="form-select mb-3">
+            <option value="">Todas as Categorias</option>
+        </select>
+
+        <input type="file" id="m3uFile" accept=".m3u,.m3u8" class="form-control mb-2" style="display: none;">
+        <button id="uploadM3UButton" class="btn btn-primary mb-2">
+            <i class="fas fa-upload"></i> <span class="sidebar-item-text">Carregar M3U</span>
+        </button>
+
+        <button id="favoritesButton" class="btn btn-secondary mb-2">
+            <i class="fas fa-heart"></i> <span class="sidebar-item-text">Favoritos</span>
+        </button>
+
+        <button id="epgButton" class="btn btn-warning mb-2">
+            <i class="fas fa-calendar-alt"></i> <span class="sidebar-item-text">Guia EPG</span>
+        </button>
+
+        <div id="channel-grid">
+            <!-- Cards dos canais serão inseridos aqui -->
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="channel-info-bar">
+            <div id="channel-details">
+                <div id="channelAvatar">📺</div>
+                <div>
+                    <span id="currentChannelName">Nenhum canal</span>
+                    <span class="live-indicator"></span>
+                    <div id="currentChannelCategory" style="font-size: 0.8em;">Selecione um canal</div>
+                </div>
+            </div>
+            <div id="controls">
+                <button id="prevChannel" title="Canal Anterior"><i class="fas fa-arrow-left"></i></button>
+                <button id="nextChannel" title="Próximo Canal"><i class="fas fa-arrow-right"></i></button>
+                <button id="toggleFavorite" title="Adicionar/Remover Favorito"><i class="far fa-heart"></i></button>
+            </div>
+        </div>
+        <div id="player-container">
+            <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto" playsinline>
+                <p class="vjs-no-js">
+                    Para ver este vídeo, por favor habilite o JavaScript e considere atualizar para um navegador que
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">suporte vídeo HTML5</a>
+                </p>
+            </video>
+        </div>
+    </div>
+
+    <!-- Modal EPG -->
+    <div class="modal fade" id="epgModal" tabindex="-1" aria-labelledby="epgModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="epgModalLabel">Guia de Programação (EPG)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="epgList">
+                        <!-- Conteúdo EPG será carregado aqui -->
+                        <p>Carregando EPG...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const player = videojs('videoPlayer', {
+            autoplay: true, // Tenta iniciar automaticamente, mas pode ser bloqueado pelo navegador
+            fluid: true, // Ajusta o player ao tamanho do container
+            liveui: true, // Interface otimizada para transmissões ao vivo
+            responsive: true,
+            errorDisplay: {
+                errors: {
+                    // Adiciona um erro personalizado para falha de carregamento de mídia
+                    4: {
+                        headline: 'O vídeo não pôde ser carregado.',
+                        message: 'Verifique sua conexão com a internet ou tente novamente mais tarde. O formato do vídeo pode não ser suportado ou o servidor pode estar offline.'
+                    }
+                }
+            }
+        });
+
+        player.on('error', function() {
+            const error = player.error();
+            console.error('Erro no player Video.js:', error);
+            let userMessage = 'Erro ao carregar o canal.';
+            if (error && error.code === 4) { // Media loading error
+                userMessage = 'Falha ao carregar o vídeo. Verifique se o link M3U está correto e o canal online.';
+                if (error.message && error.message.toLowerCase().includes('cross-origin')) {
+                    userMessage += ' Problema de CORS detectado. O servidor do canal pode não permitir acesso direto.';
+                } else if (error.message && error.message.toLowerCase().includes('manifest')) {
+                     userMessage += ' Falha ao carregar o manifesto M3U8. O formato pode ser inválido ou o arquivo não encontrado.';
+                }
+            }
+            showNotification(userMessage, 'error', 7000);
+            document.getElementById('currentChannelName').textContent = 'Erro ao carregar';
+            document.getElementById('currentChannelCategory').textContent = userMessage;
+            document.querySelector('.live-indicator').style.display = 'none';
+        });
+
+
+        let channels = [];
+        let filteredChannels = [];
+        let currentChannelIndex = -1;
+        let categories = new Set();
+        let favorites = JSON.parse(localStorage.getItem('iptvFavorites')) || [];
+        let showOnlyFavorites = false;
+
+        const categoryIcons = {
+            'Notícias': '📰', 'Esportes': '⚽', 'Filmes': '🎬', 'Séries': '📺',
+            'Infantil': '🧸', 'Documentários': '🌍', 'Música': '🎵', 'Variedades': '🎭',
+            'Religioso': '🕊️', 'Adulto': '🔞', 'Outros': '⚙️', 'Educacional': '🎓',
+            'Cultura': '🏛️', 'Viagem': '✈️', 'Culinária': '🍳', 'Tecnologia': '💻',
+            'Lifestyle': '🧘', 'Comédia': '😂', 'Drama': '😢', 'Ação': '💥',
+            'Aventura': '🏞️', 'Ficção Científica': '👽', 'Terror': '👻', 'Animação': '🎨',
+            'Entrevistas': '🎤', 'Reality Show': '🌟', 'Novelas': '💘', 'Policial': '🚓',
+            'Financeiro': '💰', 'Saúde': '⚕️', 'Natureza': '🌳', 'História': '📜',
+            'Jogos': '🎮', 'Automobilismo': '🏎️', 'Talk Show': '🗣️', 'Moda': '👗',
+            // Adicione mais categorias e ícones conforme necessário
+        };
+
+
+        document.getElementById('uploadM3UButton').addEventListener('click', () => {
+            document.getElementById('m3uFile').click();
+        });
+
+        document.getElementById('m3uFile').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        parseM3U(e.target.result);
+                        showNotification('Lista M3U carregada com sucesso!', 'success');
+                    } catch (error) {
+                        console.error("Erro ao processar o arquivo M3U:", error);
+                        showNotification(`Erro ao carregar M3U: ${error.message}`, 'error');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function parseM3U(data) {
+            channels = [];
+            categories = new Set();
+            const lines = data.split('\n');
+            let currentChannel = {};
+
+            if (!lines[0].startsWith('#EXTM3U')) {
+                throw new Error('Arquivo M3U inválido: Cabeçalho #EXTM3U ausente.');
+            }
+
+            for (const line of lines) {
+                if (line.startsWith('#EXTINF:')) {
+                    const info = line.match(/#EXTINF:-1(?:.*?tvg-id="([^"]*)")?(?:.*?tvg-name="([^"]*)")?(?:.*?tvg-logo="([^"]*)")?(?:.*?group-title="([^"]*)")?,(.+)/);
+                    if (info) {
+                        currentChannel = {
+                            tvgId: info[1] || '',
+                            tvgName: info[2] || '',
+                            logo: info[3] || '',
+                            category: info[4] ? info[4].trim() : 'Outros',
+                            name: info[5] ? info[5].trim() : 'Canal Desconhecido',
+                            url: '' // Será preenchido pela próxima linha
+                        };
+                        if (currentChannel.category) {
+                            categories.add(currentChannel.category);
+                        }
+                    } else {
+                         // Tenta um fallback mais simples se o regex complexo falhar
+                        const simpleInfo = line.match(/#EXTINF:-1,(.+)/);
+                        if (simpleInfo) {
+                            currentChannel = {
+                                name: simpleInfo[1].trim(),
+                                category: 'Outros',
+                                logo: '',
+                                url: ''
+                            };
+                             categories.add(currentChannel.category);
+                        } else {
+                            console.warn("Formato #EXTINF não reconhecido:", line);
+                            currentChannel = { name: 'Canal com Info Inválida', category: 'Outros', logo: '', url: '' };
+                        }
+                    }
+                } else if (line.trim() && !line.startsWith('#')) {
+                    if (currentChannel.name) { // Garante que temos um canal para adicionar a URL
+                        currentChannel.url = line.trim();
+                        channels.push(currentChannel);
+                        currentChannel = {}; // Reseta para o próximo canal
+                    }
+                }
+            }
+            if (channels.length === 0) {
+                showNotification('Nenhum canal encontrado no arquivo M3U. Verifique o formato.', 'error');
+                return;
+            }
+            filteredChannels = [...channels];
+            populateCategoryFilter();
+            renderChannelGrid();
+            if (filteredChannels.length > 0) {
+                loadChannel(0); // Carrega o primeiro canal da lista
+            }
+        }
+
+        function populateCategoryFilter() {
+            const categoryFilter = document.getElementById('categoryFilter');
+            categoryFilter.innerHTML = '<option value="">Todas as Categorias</option>'; // Limpa e adiciona padrão
+            const sortedCategories = Array.from(categories).sort();
+            sortedCategories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categoryFilter.appendChild(option);
+            });
+        }
+
+        function renderChannelGrid() {
+            const grid = document.getElementById('channel-grid');
+            grid.innerHTML = ''; // Limpa a grade
+            if (filteredChannels.length === 0) {
+                grid.innerHTML = '<p class="text-center w-100">Nenhum canal encontrado para os filtros aplicados.</p>';
+                return;
+            }
+
+            filteredChannels.forEach((channel, index) => {
+                const card = document.createElement('div');
+                card.className = 'channel-card';
+                card.dataset.index = index; // Usado para carregar o canal
+                card.dataset.url = channel.url; // Usado para identificar favoritos e EPG
+
+                // Adiciona logo ou placeholder
+                if (channel.logo) {
+                    const logoImg = document.createElement('img');
+                    logoImg.src = channel.logo;
+                    logoImg.alt = channel.name;
+                    logoImg.className = 'channel-logo';
+                    logoImg.onerror = function() { // Em caso de erro no logo, usa placeholder
+                        this.outerHTML = `<div class="channel-card-placeholder-logo">${categoryIcons[channel.category] || '📺'}</div>`;
+                    };
+                    card.appendChild(logoImg);
+                } else {
+                    const placeholderLogo = document.createElement('div');
+                    placeholderLogo.className = 'channel-card-placeholder-logo';
+                    placeholderLogo.textContent = categoryIcons[channel.category] || '📺';
+                    card.appendChild(placeholderLogo);
+                }
+
+                const name = document.createElement('div');
+                name.className = 'channel-name';
+                name.textContent = channel.name;
+                card.appendChild(name);
+
+                const categoryBadge = document.createElement('div');
+                categoryBadge.className = 'channel-category-badge';
+                categoryBadge.textContent = channel.category;
+                card.appendChild(categoryBadge);
+
+                card.addEventListener('click', () => {
+                    loadChannel(index);
+                    updateActiveCard(card);
+                });
+                grid.appendChild(card);
+            });
+             // Destaca o card do canal atualmente carregado, se houver
+            if (currentChannelIndex !== -1) {
+                const activeCard = grid.querySelector(`.channel-card[data-index="${currentChannelIndex}"]`);
+                if (activeCard) {
+                    updateActiveCard(activeCard);
+                }
+            }
+        }
+        function updateActiveCard(activeCardElement) {
+            document.querySelectorAll('.channel-card').forEach(c => c.classList.remove('active-channel'));
+            if (activeCardElement) {
+                activeCardElement.classList.add('active-channel');
+            }
+        }
+
+
+        function loadChannel(index) {
+            if (index < 0 || index >= filteredChannels.length) return;
+
+            currentChannelIndex = index;
+            const channel = filteredChannels[index];
+
+            // 🌟🌟🌟 ESTA É A LINHA CRÍTICA PARA GARANTIR O PROXY 🌟🌟🌟
+            // Codifica a URL do canal e a prefixa com o endereço do seu proxy
+            const proxyStreamUrl = `http://localhost:9000/proxy/${encodeURIComponent(channel.url)}`;
+
+            // Atualiza player
+            player.src({
+                src: proxyStreamUrl,
+                type: 'application/x-mpegURL' // Tipo comum para streams IPTV (.m3u8)
+            });
+
+            player.load(); // Carrega a nova fonte
+            player.play().catch(e => {
+                console.warn('Autoplay bloqueado:', e);
+                showNotification('👆 Clique em Play para iniciar o canal!', 'info', 5000);
+            });
+
+            // Atualiza informações do canal
+            document.getElementById('currentChannelName').textContent = channel.name;
+            document.getElementById('currentChannelCategory').textContent = channel.category;
+            document.getElementById('channelAvatar').textContent = categoryIcons[channel.category] || '📺';
+            document.querySelector('.live-indicator').style.display = 'inline-block'; // Mostra indicador de live
+
+            // Atualiza botão de favorito
+            updateFavoriteButton(channel.url); // Usar URL como identificador de favorito
+
+            // Atualiza o estado ativo do card na grade
+            const activeCardElement = document.querySelector(`.channel-card[data-index="${index}"]`);
+            updateActiveCard(activeCardElement);
+
+            console.log(`📺 Canal carregado: ${channel.name}`);
+        }
+
+        function updateCurrentChannelInfo(channel) {
+            document.getElementById('currentChannelName').textContent = channel.name;
+            document.getElementById('currentChannelCategory').textContent = channel.category;
+            document.getElementById('channelAvatar').textContent = categoryIcons[channel.category] || '📺';
+            document.querySelector('.live-indicator').style.display = 'inline-block';
+            updateFavoriteButton(channel.url);
+        }
+
+
+        document.getElementById('searchChannel').addEventListener('input', (e) => {
+            filterChannels(e.target.value, document.getElementById('categoryFilter').value);
+        });
+
+        document.getElementById('categoryFilter').addEventListener('change', (e) => {
+            filterChannels(document.getElementById('searchChannel').value, e.target.value);
+        });
+
+        function filterChannels(searchTerm, category) {
+            searchTerm = searchTerm.toLowerCase();
+            let tempChannels = showOnlyFavorites ? channels.filter(c => favorites.includes(c.url)) : [...channels];
+
+            if (category) {
+                tempChannels = tempChannels.filter(channel => channel.category === category);
+            }
+            if (searchTerm) {
+                tempChannels = tempChannels.filter(channel =>
+                    channel.name.toLowerCase().includes(searchTerm) ||
+                    (channel.tvgName && channel.tvgName.toLowerCase().includes(searchTerm))
+                );
+            }
+            filteredChannels = tempChannels;
+            renderChannelGrid();
+             // Após filtrar, se um canal estava tocando e ainda está na lista filtrada,
+            // tenta manter o estado ativo no card. Caso contrário, limpa.
+            const currentPlayingChannel = channels[currentChannelIndex];
+            if (currentPlayingChannel) {
+                const newIndexOfCurrent = filteredChannels.findIndex(ch => ch.url === currentPlayingChannel.url);
+                if (newIndexOfCurrent !== -1) {
+                    currentChannelIndex = newIndexOfCurrent; // Atualiza o índice para a lista filtrada
+                    const activeCard = document.querySelector(`.channel-card[data-index="${currentChannelIndex}"]`);
+                    updateActiveCard(activeCard);
+                } else {
+                    currentChannelIndex = -1; // Canal atual não está mais visível
+                    updateActiveCard(null); // Remove destaque de qualquer card
+                }
+            }
+        }
+
+        document.getElementById('prevChannel').addEventListener('click', () => {
+            loadChannel((currentChannelIndex - 1 + filteredChannels.length) % filteredChannels.length);
+        });
+
+        document.getElementById('nextChannel').addEventListener('click', () => {
+            loadChannel((currentChannelIndex + 1) % filteredChannels.length);
+        });
+
+        document.getElementById('toggleFavorite').addEventListener('click', () => {
+            if (currentChannelIndex === -1) {
+                showNotification('Nenhum canal selecionado para favoritar.', 'info');
+                return;
+            }
+            const channelUrl = filteredChannels[currentChannelIndex].url;
+            const favIndex = favorites.indexOf(channelUrl);
+
+            if (favIndex > -1) {
+                favorites.splice(favIndex, 1); // Remove
+                showNotification('Canal removido dos favoritos!', 'info');
+            } else {
+                favorites.push(channelUrl); // Adiciona
+                showNotification('Canal adicionado aos favoritos!', 'success');
+            }
+            localStorage.setItem('iptvFavorites', JSON.stringify(favorites));
+            updateFavoriteButton(channelUrl);
+            if (showOnlyFavorites) filterChannels(document.getElementById('searchChannel').value, document.getElementById('categoryFilter').value); // Re-renderiza se estiver na visualização de favoritos
+        });
+
+        function updateFavoriteButton(channelUrl) {
+            const favButton = document.getElementById('toggleFavorite');
+            if (favorites.includes(channelUrl)) {
+                favButton.innerHTML = '<i class="fas fa-heart"></i>'; // Coração preenchido
+                favButton.title = "Remover dos Favoritos";
+            } else {
+                favButton.innerHTML = '<i class="far fa-heart"></i>'; // Coração vazio
+                favButton.title = "Adicionar aos Favoritos";
+            }
+        }
+
+        document.getElementById('favoritesButton').addEventListener('click', () => {
+            showOnlyFavorites = !showOnlyFavorites;
+            document.getElementById('favoritesButton').classList.toggle('active'); // Adiciona feedback visual
+            if (showOnlyFavorites) {
+                document.getElementById('favoritesButton').innerHTML = '<i class="fas fa-heart-broken"></i> <span class="sidebar-item-text">Mostrar Todos</span>';
+                 showNotification('Mostrando apenas canais favoritos.', 'info');
+            } else {
+                document.getElementById('favoritesButton').innerHTML = '<i class="fas fa-heart"></i> <span class="sidebar-item-text">Favoritos</span>';
+                 showNotification('Mostrando todos os canais.', 'info');
+            }
+            filterChannels(document.getElementById('searchChannel').value, document.getElementById('categoryFilter').value);
+        });
+
+        // Notificações
+        function showNotification(message, type = 'info', duration = 3000) {
+            const container = document.body; // Ou um container específico para notificações
+            const toast = document.createElement('div');
+            toast.className = `notification-toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            // Animação de entrada
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100); // Pequeno delay para garantir que a transição CSS ocorra
+
+            // Remover a notificação após a duração
+            setTimeout(() => {
+                toast.classList.remove('show');
+                // Esperar a transição de saída antes de remover do DOM
+                toast.addEventListener('transitionend', () => {
+                    if (toast.parentNode) { // Verifica se ainda está no DOM
+                        toast.remove();
+                    }
+                });
+            }, duration);
+        }
+
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            // Ajusta o ícone do botão toggle
+            const icon = sidebarToggle.querySelector('i');
+            if (sidebar.classList.contains('collapsed')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-chevron-right');
+            } else {
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-bars');
+            }
+            // Força o Video.js a se redimensionar se necessário
+             setTimeout(() => player.fluid(true), 350); // Atraso para coincidir com a animação do sidebar
+        });
+
+
+        // EPG (Exemplo básico, precisa de fonte de dados EPG real)
+        document.getElementById('epgButton').addEventListener('click', async () => {
+            const epgModal = new bootstrap.Modal(document.getElementById('epgModal'));
+            const epgListDiv = document.getElementById('epgList');
+            epgListDiv.innerHTML = '<p>Carregando EPG...</p>';
+            epgModal.show();
+
+            // Simulação de busca de EPG. Substitua por sua lógica real.
+            // Idealmente, você teria uma URL de EPG XMLTV ou JSON.
+            // Se o canal atual tiver um tvg-id, use-o para buscar o EPG específico.
+            let epgData = [];
+            if (currentChannelIndex !== -1 && filteredChannels[currentChannelIndex].tvgId) {
+                const channelTvgId = filteredChannels[currentChannelIndex].tvgId;
+                // Exemplo: epgData = await fetchEPGForChannel(channelTvgId);
+                // Simulação:
+                epgData.push({ title: 'Programa Atual', description: `Programação para ${filteredChannels[currentChannelIndex].name}`, start: new Date().toLocaleTimeString(), end: '' });
+                epgData.push({ title: 'Próximo Programa', description: 'Em breve', start: '', end: '' });
+            } else {
+                epgData.push({ title: 'EPG não disponível', description: 'Informações de TVG não encontradas para este canal ou lista M3U.', start: '', end: '' });
+            }
+
+            renderEPG(epgData);
+        });
+
+        function renderEPG(epgData) {
+            const epgListDiv = document.getElementById('epgList');
+            if (!epgData || epgData.length === 0) {
+                epgListDiv.innerHTML = '<p>Nenhuma informação de EPG disponível para este canal.</p>';
+                return;
+            }
+            let html = '';
+            epgData.forEach(item => {
+                html += `
+                    <div class="epg-item">
+                        <h5>${item.title}</h5>
+                        <p>${item.description}</p>
+                        ${item.start ? `<small>Início: ${item.start} ${item.end ? `- Fim: ${item.end}` : ''}</small>` : ''}
+                    </div>
+                `;
+            });
+            epgListDiv.innerHTML = html;
+        }
+
+
+        // Carregar canais de um M3U de exemplo ao iniciar (opcional)
+        // Pode ser substituído por um fetch de uma URL M3U padrão
+        const defaultM3U = `#EXTM3U
+#EXTINF:-1 tvg-id="Canal1.br" tvg-name="Canal Exemplo 1" tvg-logo="https://via.placeholder.com/50/FF0000/FFFFFF?text=C1" group-title="Notícias",Canal Exemplo 1 (Notícias)
+http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+#EXTINF:-1 tvg-id="Canal2.br" tvg-name="Canal Exemplo 2" tvg-logo="https://via.placeholder.com/50/00FF00/000000?text=C2" group-title="Esportes",Canal Exemplo 2 (Esportes)
+http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4
+#EXTINF:-1 tvg-id="Canal3.br" tvg-name="Canal Exemplo 3" tvg-logo="" group-title="Filmes",Canal Exemplo 3 (Filmes)
+http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8
+#EXTINF:-1 tvg-id="Canal4.br" tvg-name="Canal Exemplo 4 - Sem Logo" group-title="Séries",Canal Exemplo 4 (Séries)
+http://playertest.longtailvideo.com/adaptive/wowzaid3/playlist.m3u8`;
+
+        try {
+            parseM3U(defaultM3U);
+        } catch (e) {
+            console.error("Erro ao carregar M3U padrão:", e);
+            showNotification("Falha ao carregar lista de canais padrão.", "error");
+        }
+
+        // Exemplo de como poderia ser um fetch de uma URL remota:
+        /*
+        fetch('URL_DA_SUA_LISTA_M3U_REMOTE')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                parseM3U(data);
+                showNotification('Lista M3U remota carregada!', 'success');
+            })
+            .catch(error => {
+                console.error('Erro ao carregar lista M3U remota:', error);
+                showNotification(`Erro ao carregar lista remota: ${error.message}`, 'error');
+                // Tenta carregar a lista padrão como fallback
+                try {
+                    parseM3U(defaultM3U);
+                    showNotification('Carregada lista de canais padrão como fallback.', 'info');
+                } catch (e) {
+                    console.error("Erro ao carregar M3U padrão:", e);
+                    showNotification("Falha ao carregar lista de canais padrão.", "error");
+                }
+            });
+        */
+
+    </script>
+</body>
+</html>
