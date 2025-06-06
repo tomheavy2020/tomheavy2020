@@ -709,7 +709,14 @@
 
             // 🌟🌟🌟 ESTA É A LINHA CRÍTICA PARA GARANTIR O PROXY 🌟🌟🌟
             // Codifica a URL do canal e a prefixa com o endereço do seu proxy
-            const proxyStreamUrl = `http://localhost:9000/proxy/${encodeURIComponent(channel.url)}`;
+            let proxyStreamUrl;
+            // Check if the channel URL already includes the full proxy path
+            if (channel.url.startsWith('http://localhost:9000/proxy/')) {
+                proxyStreamUrl = channel.url;
+            } else {
+                // If not, construct the proxy URL as before
+                proxyStreamUrl = `http://localhost:9000/proxy/${encodeURIComponent(channel.url)}`;
+            }
 
             // Atualiza player
             player.src({
