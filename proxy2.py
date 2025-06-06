@@ -23,10 +23,11 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             for path_to_try in PROBE_PATHS:
                 if os.path.exists(path_to_try):
                     ProxyHTTPRequestHandler.resolved_index_html_path = os.path.abspath(path_to_try)
-                    print(f"Found index.html at: {self.resolved_index_html_path}")
+                    # Removed print statement for found path
                     break
             if ProxyHTTPRequestHandler.resolved_index_html_path is None:
-                print(f"Warning: index.html not found in probed paths: {PROBE_PATHS}")
+                # Removed print statement for warning if not found
+                pass
 
         super().__init__(*args, **kwargs)
 
@@ -227,11 +228,15 @@ def run_server(server_class=http.server.ThreadingHTTPServer, handler_class=Proxy
     print(f"Starting M3U Proxy and HTTP server on port {port}...")
     print(f"  Proxy endpoint: http://localhost:{port}/proxy/YOUR_TARGET_URL")
     print(f"  HTML player: http://localhost:{port}/")
-    if ProxyHTTPRequestHandler.resolved_index_html_path:
-        print(f"  Serving index.html from: {ProxyHTTPRequestHandler.resolved_index_html_path}")
+
+    if handler_class.resolved_index_html_path: # Use handler_class as per the request
+        print(f"  Serving index.html from: {handler_class.resolved_index_html_path}")
     else:
         print(f"  Warning: index.html could not be found. Player interface may not be available.")
-        print(f"  Searched in: {PROBE_PATHS}")
+        # Construct the probed paths string for the warning message
+        probed_paths_str = ", ".join([os.path.abspath(p) for p in PROBE_PATHS])
+        print(f"  Searched in: [{probed_paths_str}]")
+
     httpd.serve_forever()
 
 if __name__ == '__main__':
