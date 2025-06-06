@@ -1,0 +1,16 @@
+#EXTM3U
+
+#EXTINF:-1 tvg-id="Globo" tvg-name="Globo" tvg-logo="https://example.com/logos/globo.png",Globo
+#REAL_STREAM_URL_GLOBO
+
+#EXTINF:-1 tvg-id="SBT" tvg-name="SBT" tvg-logo="https://example.com/logos/sbt.png",SBT
+#REAL_STREAM_URL_SBT
+
+#EXTINF:-1 tvg-id="Record" tvg-name="Record" tvg-logo="https://example.com/logos/record.png",Record
+#REAL_STREAM_URL_RECORD
+
+#EXTINF:-1 tvg-id="Band" tvg-name="Band" tvg-logo="https://example.com/logos/band.png",Band
+#REAL_STREAM_URL_BAND
+
+#EXTINF:-1 tvg-id="RedeTV" tvg-name="RedeTV" tvg-logo="https://example.com/logos/redetv.png",RedeTV
+#REAL_STREAM_URL_REDETV

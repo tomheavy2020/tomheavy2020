@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTV Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .player-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #player {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            background-color: #000;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .controls button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .controls button:hover {
+            background-color: #555;
+        }
+
+        .playlist-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .playlist-search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .playlist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .playlist li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .playlist li:last-child {
+            border-bottom: none;
+        }
+
+        .playlist li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .playlist li img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .playlist li.active {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .drop-zone.hover {
+            background-color: #f9f9f9;
+        }
+
+        .drop-zone p {
+            margin: 0;
+            font-size: 1.2em;
+            color: #aaa;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn {
+            border: 2px solid gray;
+            color: gray;
+            background-color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IPTV Player</h1>
+        </header>
+
+        <div class="player-container">
+            <video id="player" controls autoplay></video>
+        </div>
+
+        <div class="controls">
+            <button id="prev-channel"><i class="fas fa-backward"></i></button>
+            <button id="next-channel"><i class="fas fa-forward"></i></button>
+        </div>
+
+        <div class="drop-zone" id="drop-zone">
+            <p>Drag and drop M3U file here or click to upload</p>
+            <div class="upload-btn-wrapper">
+                <button class="btn">Upload M3U File</button>
+                <input type="file" id="file-input" accept=".m3u,.m3u8">
+            </div>
+        </div>
+
+        <div class="playlist-container">
+            <input type="text" id="search-input" class="playlist-search" placeholder="Search channels...">
+            <ul id="playlist" class="playlist">
+                <!-- Channels will be loaded here -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        const player = document.getElementById('player');
+        const playlistElement = document.getElementById('playlist');
+        const searchInput = document.getElementById('search-input');
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const prevChannelButton = document.getElementById('prev-channel');
+        const nextChannelButton = document.getElementById('next-channel');
+
+        let channels = [];
+        let currentChannelIndex = -1;
+        let hls;
+
+        function loadM3U(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                parseM3U(event.target.result);
+            };
+            reader.readAsText(file);
+        }
+
+        function parseM3U(data) {
+            channels = [];
+            const lines = data.split('\\n');
+            let currentChannel = {};
+
+            for (const line of lines) {
+                if (line.startsWith('#EXTINF:')) {
+                    const info = line.match(/#EXTINF:-1 tvg-id="([^"]*)" tvg-name="([^"]*)" tvg-logo="([^"]*)",(.*)/);
+                    if (info) {
+                        currentChannel = {
+                            id: info[1],
+                            name: info[4] || info[2], // Use channel name after comma if available, else tvg-name
+                            logo: info[3],
+                            url: ''
+                        };
+                    }
+                } else if (line.trim() && !line.startsWith('#')) {
+                    if (currentChannel.name) {
+                        currentChannel.url = line.trim();
+                        channels.push(currentChannel);
+                        currentChannel = {};
+                    }
+                }
+            }
+            renderPlaylist();
+            if (channels.length > 0) {
+                playChannel(0);
+            }
+        }
+
+        function renderPlaylist(filter = '') {
+            playlistElement.innerHTML = '';
+            const filteredChannels = channels.filter(channel => channel.name.toLowerCase().includes(filter.toLowerCase()));
+
+            filteredChannels.forEach((channel, index) => {
+                const listItem = document.createElement('li');
+                listItem.dataset.index = channels.indexOf(channel); // Use original index to play correct channel
+
+                const img = document.createElement('img');
+                img.src = channel.logo || 'placeholder.png'; // Fallback logo
+                img.alt = channel.name;
+                img.onerror = () => { img.src = 'placeholder.png'; }; // Handle broken logo links
+
+                const name = document.createTextNode(channel.name);
+
+                listItem.appendChild(img);
+                listItem.appendChild(name);
+
+                if (channels.indexOf(channel) === currentChannelIndex) {
+                    listItem.classList.add('active');
+                }
+
+                listItem.addEventListener('click', () => {
+                    playChannel(channels.indexOf(channel));
+                });
+                playlistElement.appendChild(listItem);
+            });
+        }
+
+        function playChannel(index) {
+            if (index >= 0 && index < channels.length) {
+                currentChannelIndex = index;
+                const channel = channels[index];
+
+                if (hls) {
+                    hls.destroy();
+                }
+
+                if (Hls.isSupported() && (channel.url.includes('.m3u8') || channel.url.includes('.m3u'))) {
+                    hls = new Hls();
+                    hls.loadSource(channel.url);
+                    hls.attachMedia(player);
+                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                        player.play();
+                    });
+                } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+                    player.src = channel.url;
+                    player.addEventListener('loadedmetadata', () => {
+                        player.play();
+                    });
+                } else {
+                    player.src = channel.url;
+                    player.play();
+                }
+                updatePlaylistActiveState();
+            }
+        }
+
+        function updatePlaylistActiveState() {
+            const items = playlistElement.querySelectorAll('li');
+            items.forEach((item, i) => { // Ensure original index is used for comparison
+                const itemIndex = parseInt(item.dataset.index, 10);
+                if (itemIndex === currentChannelIndex) {
+                    item.classList.add('active');
+                    item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function playNextChannel() {
+            if (channels.length > 0) {
+                const nextIndex = (currentChannelIndex + 1) % channels.length;
+                playChannel(nextIndex);
+            }
+        }
+
+        function playPrevChannel() {
+            if (channels.length > 0) {
+                const prevIndex = (currentChannelIndex - 1 + channels.length) % channels.length;
+                playChannel(prevIndex);
+            }
+        }
+
+        searchInput.addEventListener('input', (event) => {
+            renderPlaylist(event.target.value);
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                loadM3U(file);
+            }
+        });
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('hover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('hover');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('hover');
+            const file = event.dataTransfer.files[0];
+            if (file) {
+                loadM3U(file);
+            }
+        });
+
+        prevChannelButton.addEventListener('click', playPrevChannel);
+        nextChannelButton.addEventListener('click', playNextChannel);
+
+        // Load a default M3U file (optional)
+        // fetch('basic.m3u')
+        //     .then(response => response.text())
+        //     .then(data => parseM3U(data))
+        //     .catch(error => console.error('Error loading default M3U:', error));
+
+    </script>
+</body>
+</html>
