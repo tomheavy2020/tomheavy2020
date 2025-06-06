@@ -1,16 +1,24 @@
 #EXTM3U
 
-#EXTINF:-1 tvg-id="Globo" tvg-name="Globo" tvg-logo="https://example.com/logos/globo.png",Globo
-#REAL_STREAM_URL_GLOBO
+# --- CANAL PRINCIPAL RECOMENDADO (SUBSTITUTO DA CNN) ---
 
-#EXTINF:-1 tvg-id="SBT" tvg-name="SBT" tvg-logo="https://example.com/logos/sbt.png",SBT
-#REAL_STREAM_URL_SBT
+#EXTINF:-1 tvg-id="jovem-pan-news" tvg-name="Jovem Pan News (Estável)" tvg-logo="https://jovempan.com.br/favicon.ico" group-title="Notícias",Jovem Pan News (Estável)
+http://localhost:9000/proxy/https%3A%2F%2Fd6yfbj4xxtrod.cloudfront.net%2Fout%2Fv1%2F7836eb391ec24452b149f3dc6df15bbd%2Findex.m3u8
 
-#EXTINF:-1 tvg-id="Record" tvg-name="Record" tvg-logo="https://example.com/logos/record.png",Record
-#REAL_STREAM_URL_RECORD
 
-#EXTINF:-1 tvg-id="Band" tvg-name="Band" tvg-logo="https://example.com/logos/band.png",Band
-#REAL_STREAM_URL_BAND
+# --- OUTROS CANAIS ESTÁVEIS PARA TESTE ---
 
-#EXTINF:-1 tvg-id="RedeTV" tvg-name="RedeTV" tvg-logo="https://example.com/logos/redetv.png",RedeTV
-#REAL_STREAM_URL_REDETV
+#EXTINF:-1 tvg-id="tv-senado" tvg-name="TV Senado (Estável)" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/f/f9/TV_Senado_logo_2019.png" group-title="Governo",TV Senado (Estável)
+http://localhost:9000/proxy/https%3A%2F%2Fsenado-f.akamaihd.net%2Fi%2Ftelevisao_1%4071814%2Findex_1200_av-p.m3u8
+
+#EXTINF:-1 tvg-id="tv-camara" tvg-name="TV Câmara (Estável)" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/0/04/TV_C%C3%A2mara_logo.png" group-title="Governo",TV Câmara (Estável)
+http://localhost:9000/proxy/https%3A%2F%2Fstream3.camara.gov.br%2Ftv1%2Fmanifest.m3u8
+
+#EXTINF:-1 tvg-id="tv-brasil" tvg-name="TV Brasil (Estável)" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/8/8f/Logotipo_da_TV_Brasil.png" group-title="Governo",TV Brasil (Estável)
+http://localhost:9000/proxy/https%3A%2F%2Ftvbrasil-stream.ebc.com.br%2Findex.m3u8
+
+#EXTINF:-1 tvg-id="record-news" tvg-name="Record News" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/8/89/Logotipo_da_Record_News.png" group-title="Notícias",Record News
+http://localhost:9000/proxy/https%3A%2F%2Fplayplusespn-lh.akamaihd.net%2Fi%2Fpp_nws%40377849%2Findex_360_av-p.m3u8
+
+#EXTINF:-1 tvg-id="band-news" tvg-name="BandNews TV" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/2/27/BandNews_FM_logo.png" group-title="Notícias",BandNews TV
+http://localhost:9000/proxy/https%3A%2F%2F5cf4a2c2512a2.streamlock.net%2Fdgrau%2Fdgrau%2Fplaylist.m3u8
