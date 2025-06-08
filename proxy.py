@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-HLS/M3U8 Streaming Proxy Server
+HLS/M3U8 Streaming Proxy Server com Logging Detalhado
 Suporta arquivos M3U8 grandes com processamento eficiente em streaming
 """
 
@@ -13,6 +13,7 @@ import logging
 import re
 import io
 import time
+import argparse
 from threading import Thread
 from urllib.parse import urlparse, urljoin, quote
 from http.client import HTTPResponse
@@ -40,12 +41,111 @@ HLS_URI_PATTERN = re.compile(
     re.IGNORECASE
 )
 
+class DetailedM3U8Logger:
+    def __init__(self, filename):
+        self.total_segments = 0
+        self.total_duration = 0.0
+        self.segment_durations = []
+        self.encryption_info = []
+        self.variant_streams = []
+        self.codec_info = []
+        self.filename = filename
+
+    def parse_m3u8(self, content):
+        """Analisa detalhadamente o conteúdo do M3U8"""
+        lines = content.split('\n')
+        current_segment_duration = None
+
+        for line in lines:
+            line = line.strip()
+
+            # Detectar versão do playlist
+            if line.startswith('#EXT-X-VERSION:'):
+                logging.info(f"Versão HLS: {line.split(':')[1]}")
+
+            # Detectar duração do segmento
+            if line.startswith('#EXTINF:'):
+                try:
+                    duration = float(line.split(':')[1].split(',')[0])
+                    current_segment_duration = duration
+                    self.total_duration += duration
+                    self.segment_durations.append(duration)
+                except Exception as e:
+                    logging.warning(f"Erro ao parsear duração: {line}")
+
+            # Detectar segmentos
+            if line and not line.startswith('#') and current_segment_duration is not None:
+                self.total_segments += 1
+                current_segment_duration = None
+
+            # Detectar informações de criptografia
+            if line.startswith('#EXT-X-KEY:'):
+                self.encryption_info.append(line)
+                logging.info(f"Segmento criptografado: {line}")
+
+            # Detectar variant streams (streams de diferentes qualidades)
+            if line.startswith('#EXT-X-STREAM-INF:'):
+                self.variant_streams.append(line)
+                logging.info(f"Stream variante detectada: {line}")
+
+            # Detectar codecs
+            if 'CODECS=' in line:
+                codecs = re.findall(r'CODECS="([^"]*)"', line)
+                if codecs:
+                    self.codec_info.extend(codecs)
+                    logging.info(f"Codecs encontrados: {codecs}")
+
+    def generate_detailed_report(self):
+        """Gera um relatório detalhado do M3U8"""
+        report = f"""
+╔══════════════════════════════════════════════════
+║ RELATÓRIO DETALHADO DO M3U8: {self.filename}
+╠══════════════════════════════════════════════════
+║ RESUMO GERAL:
+║ - Total de Segmentos: {self.total_segments}
+║ - Duração Total: {self.total_duration:.2f} segundos
+║ - Duração Média por Segmento: {self.total_duration/max(1,self.total_segments):.2f} segundos
+╠══════════════════════════════════════════════════
+║ DETALHES DE SEGMENTOS:
+║ - Menor Duração: {min(self.segment_durations) if self.segment_durations else 'N/A'} s
+║ - Maior Duração: {max(self.segment_durations) if self.segment_durations else 'N/A'} s
+╠══════════════════════════════════════════════════
+║ CRIPTOGRAFIA:
+║ {len(self.encryption_info)} segmentos criptografados
+╠══════════════════════════════════════════════════
+║ STREAMS VARIANTES:
+║ {len(self.variant_streams)} streams de diferentes qualidades
+╠══════════════════════════════════════════════════
+║ CODECS:
+║ {', '.join(set(self.codec_info)) if self.codec_info else 'Nenhum codec identificado'}
+╚══════════════════════════════════════════════════
+"""
+        return report
+
+def log_m3u8_details(file_content, filename='playlist.m3u8'):
+    """
+    Função principal para fazer log detalhado de M3U8
+
+    Args:
+        file_content (str): Conteúdo do arquivo M3U8
+        filename (str, opcional): Nome do arquivo para relatório
+    """
+    logger = DetailedM3U8Logger(filename)
+
+    try:
+        # Parse o conteúdo
+        logger.parse_m3u8(file_content)
+
+        # Imprima o relatório detalhado
+        logging.info(logger.generate_detailed_report())
+
+    except Exception as e:
+        logging.error(f"Erro ao processar M3U8: {e}")
 
 class ThreadingHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
     """Servidor HTTP com suporte a múltiplas threads"""
     daemon_threads = True
     request_queue_size = 100
-
 
 class StreamingM3U8Processor:
     """Processa arquivos M3U8 grandes em modo streaming"""
@@ -64,25 +164,17 @@ class StreamingM3U8Processor:
             def replace_uri(match):
                 prefix, uri, suffix = match.groups()
                 absolute_uri = urljoin(self.base_url, uri)
-                proxied_uri = f"/proxy/{quote(absolute_uri, safe='/')}"
-                logger.debug(f"Rewriting M3U8 URI: '{uri}' to '{proxied_uri}'") # Added line
+                proxied_uri = f"/proxy/{quote(absolute_uri, safe='')}"
                 return f"{prefix}{proxied_uri}{suffix}"
 
             line = HLS_URI_PATTERN.sub(replace_uri, line)
 
         elif line and not line.startswith('#'):
             # É uma URL de segmento
-            # It might also be beneficial to log segment URL rewriting
-            original_segment_url = line.strip()
-            segment_url = urljoin(self.base_url, original_segment_url)
-            proxied_segment_url = f"/proxy/{quote(segment_url, safe='/')}"
-            # Check if the line actually changed to avoid logging non-URL lines if any slip through
-            if line != proxied_segment_url:
-                 logger.debug(f"Rewriting M3U8 segment URL: '{original_segment_url}' to '{proxied_segment_url}'")
-            line = proxied_segment_url
+            segment_url = urljoin(self.base_url, line.strip())
+            line = f"/proxy/{quote(segment_url, safe='')}"
 
         return line
-
 
 class ProxyHandler(http.server.BaseHTTPRequestHandler):
     """Handler otimizado para proxy com suporte a streaming"""
@@ -212,6 +304,49 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
         """Processa e transmite conteúdo M3U8 com eficiência para arquivos grandes"""
         logger.info(f"Processando M3U8: {base_url}")
 
+        # Ler conteúdo completo para análise (apenas para logging)
+        try:
+            content_length_str = response.headers.get('Content-Length')
+            file_content_bytes = b''
+            bytes_read = 0
+            content_length = None
+
+            if content_length_str:
+                try:
+                    content_length = int(content_length_str)
+                except ValueError:
+                    logger.info(f"Invalid Content-Length value for {base_url}, cannot show download progress for playlist.")
+                    content_length = None
+
+            if content_length is None:
+                 logger.info(f"Content-Length not available or invalid for {base_url}, cannot show download progress for playlist.")
+
+            if content_length and content_length > 0:
+                logger.info(f"Downloading playlist: {base_url} ({content_length / 1024:.2f} KB)")
+                while True:
+                    chunk = response.read(BUFFER_SIZE)
+                    if not chunk:
+                        break
+                    file_content_bytes += chunk
+                    bytes_read += len(chunk)
+                    percentage = (bytes_read / content_length) * 100
+                    logger.info(f"Loading {base_url}... {percentage:.2f}% ({bytes_read / 1024:.2f} KB / {content_length / 1024:.2f} KB)")
+            else:
+                # Fallback if content_length is not available or zero
+                file_content_bytes = response.read()
+                logger.info(f"Read {len(file_content_bytes) / 1024:.2f} KB for {base_url} (no progress due to missing Content-Length).")
+
+            file_content_str = file_content_bytes.decode('utf-8', errors='ignore')
+
+            # Log detalhado
+            log_m3u8_details(file_content_str, base_url)
+
+            # Resetar stream para processamento normal
+            response = io.BytesIO(file_content_bytes)
+
+        except Exception as e:
+            logging.error(f"Erro no logging detalhado ou durante a leitura do M3U8: {e}", exc_info=True)
+
         # Enviar headers com chunked encoding
         self._headers_sent = True
         self.send_response(200)
@@ -249,9 +384,11 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
                 remaining = b''
 
                 for line_bytes in buffer:
-                    if line_bytes.endswith(b'\n'):
+                    if line_bytes.endswith(b'
+'):
                         # Linha completa
-                        line = line_bytes.decode('utf-8', errors='ignore').rstrip('\n')
+                        line = line_bytes.decode('utf-8', errors='ignore').rstrip('
+')
                         processed = processor.process_line(line)
                         self._write_m3u8_line(processed)
                     else:
@@ -272,7 +409,9 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
                     )
 
             # Finalizar chunked encoding
-            self.wfile.write(b'0\r\n\r\n')
+            self.wfile.write(b'0
+
+')
             self.wfile.flush()
 
             elapsed = time.time() - start_time
@@ -288,12 +427,15 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
 
     def _write_m3u8_line(self, line: str):
         """Escreve uma linha processada no formato chunked"""
-        data = (line + '\n').encode('utf-8')
-        chunk_header = f'{len(data):X}\r\n'.encode('utf-8')
+        data = (line + '
+').encode('utf-8')
+        chunk_header = f'{len(data):X}
+'.encode('utf-8')
 
         self.wfile.write(chunk_header)
         self.wfile.write(data)
-        self.wfile.write(b'\r\n')
+        self.wfile.write(b'
+')
 
     def stream_binary_content(self, response: HTTPResponse, content_type: str, content_length: Optional[str]):
         """Transmite conteúdo binário (não-M3U8) com streaming eficiente"""
@@ -332,9 +474,11 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
                     self.wfile.write(chunk)
                 else:
                     # Envio chunked
-                    self.wfile.write(f'{len(chunk):X}\r\n'.encode())
+                    self.wfile.write(f'{len(chunk):X}
+'.encode())
                     self.wfile.write(chunk)
-                    self.wfile.write(b'\r\n')
+                    self.wfile.write(b'
+')
 
                 # Log de progresso para arquivos grandes
                 if bytes_sent % (10 * 1024 * 1024) == 0:  # A cada 10MB
@@ -344,7 +488,9 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
 
             # Finalizar chunked se necessário
             if not content_length:
-                self.wfile.write(b'0\r\n\r\n')
+                self.wfile.write(b'0
+
+')
 
             self.wfile.flush()
 
@@ -429,6 +575,24 @@ def main():
     server = ProxyServer(args.port)
     server.start()
 
+    # COMO TESTAR:
+    # 1. Execute este script: python proxy.py
+    #    - Você pode precisar adicionar domínios à lista ALLOWED_DOMAINS no script
+    #      ou usar o argumento -d/--domain ao executar.
+    #      Ex: python proxy.py -d some.streamdomain.com
+    # 2. Encontre uma URL de stream M3U ou M3U8 pública.
+    #    Exemplo (verifique se o domínio está permitido):
+    #    https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8
+    # 3. Codifique a URL do stream. Você pode usar uma ferramenta online de URL encoding.
+    # 4. Construa a URL do proxy:
+    #    http://localhost:PORT/proxy/SUA_URL_CODIFICADA
+    #    Substitua PORT pela porta que o proxy está usando (padrão 8080).
+    #    Ex: http://localhost:8080/proxy/https%3A%2F%2Fcph-p2p-msl.akamaized.net%2Fhls%2Flive%2F2000341%2Ftest%2Fmaster.m3u8
+    # 5. Abra a URL do proxy em um player de vídeo como VLC (Arquivo > Abrir Rede)
+    #    ou use uma ferramenta de teste HLS online.
+    # 6. Observe os logs do console para ver o progresso do download da playlist,
+    #    o relatório detalhado do M3U8 e outros logs de operação.
 
+# Entrada do script
 if __name__ == '__main__':
     main()
