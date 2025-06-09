@@ -384,11 +384,9 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
                 remaining = b''
 
                 for line_bytes in buffer:
-                    if line_bytes.endswith(b'
-'):
+                    if line_bytes.endswith(b'\n'):
                         # Linha completa
-                        line = line_bytes.decode('utf-8', errors='ignore').rstrip('
-')
+                        line = line_bytes.decode('utf-8', errors='ignore').rstrip('\r\n')
                         processed = processor.process_line(line)
                         self._write_m3u8_line(processed)
                     else:
@@ -409,9 +407,7 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
                     )
 
             # Finalizar chunked encoding
-            self.wfile.write(b'0
-
-')
+            self.wfile.write(b'0\r\n\r\n')
             self.wfile.flush()
 
             elapsed = time.time() - start_time
@@ -427,15 +423,12 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
 
     def _write_m3u8_line(self, line: str):
         """Escreve uma linha processada no formato chunked"""
-        data = (line + '
-').encode('utf-8')
-        chunk_header = f'{len(data):X}
-'.encode('utf-8')
+        data = (line + '\n').encode('utf-8')
+        chunk_header = f'{len(data):X}\r\n'.encode('utf-8')
 
         self.wfile.write(chunk_header)
         self.wfile.write(data)
-        self.wfile.write(b'
-')
+        self.wfile.write(b'\r\n')
 
     def stream_binary_content(self, response: HTTPResponse, content_type: str, content_length: Optional[str]):
         """Transmite conteúdo binário (não-M3U8) com streaming eficiente"""
@@ -474,11 +467,9 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
                     self.wfile.write(chunk)
                 else:
                     # Envio chunked
-                    self.wfile.write(f'{len(chunk):X}
-'.encode())
+                    self.wfile.write(f'{len(chunk):X}\r\n'.encode())
                     self.wfile.write(chunk)
-                    self.wfile.write(b'
-')
+                    self.wfile.write(b'\r\n')
 
                 # Log de progresso para arquivos grandes
                 if bytes_sent % (10 * 1024 * 1024) == 0:  # A cada 10MB
@@ -488,9 +479,7 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
 
             # Finalizar chunked se necessário
             if not content_length:
-                self.wfile.write(b'0
-
-')
+                self.wfile.write(b'0\r\n\r\n')
 
             self.wfile.flush()
 
