@@ -1,0 +1,16 @@
+{
+  "name": "subdomain-checker",
+  "version": "1.0.0",
+  "description": "A script to check subdomains",
+  "main": "check_subdomains.js",
+  "scripts": {
+    "start": "node check_subdomains.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {},
+  "keywords": ["subdomain", "checker", "axios"],
+  "author": "",
+  "license": "ISC"
+}
