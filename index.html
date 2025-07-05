@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Shop Matinhos - Sua melhor escolha em drone</title>
+
+    <meta name="description" content="Drone Shop Matinhos: Sua melhor escolha em drones no litoral paranaense. Venda de drones DJI, serviços de fotografia e filmagem aérea para imóveis, eventos e empresas.">
+    <meta name="keywords" content="drones, Matinhos, litoral paranaense, fotografia aérea, filmagem aérea, DJI, aluguel de drones, serviços com drones, loja de drones, orçamento, Pix, boleto, cartão de crédito">
+    <meta name="author" content="Drone Shop Matinhos">
+
+    <meta property="og:title" content="Drone Shop Matinhos - Sua melhor escolha em drone">
+    <meta property="og:description" content="Sua loja especializada em drones e serviços de
+fotografia aérea no litoral paranaense. DJI Mini, Air, Mavic e mais!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.droneshopmatinhos.com.br/">
+    <meta property="og:image" content="https://www.droneshopmatinhos.com.br/images/social-share-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Drone Shop Matinhos - Sua melhor escolha em drone">
+    <meta name="twitter:description" content="Sua loja especializada em drones e serviços de fotografia aérea no litoral paranaense.
+DJI Mini, Air, Mavic e mais!">
+    <meta name="twitter:image" content="https://www.droneshopmatinhos.com.br/images/social-share-image.jpg">
+    <link rel="canonical" href="https://www.droneshopmatinhos.com.br/">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variáveis CSS para um tema futurista */
+        :root {
+            --primary-bg: #0A0A1A; /* Fundo principal escuro */
+            --secondary-bg: #1A1A3A; /* Fundo secundário mais claro */
+
+      --surface-color: #2A2A4A; /* Cor de superfície para cards */
+            --accent-color-1: #00E5FF; /* Azul ciano vibrante */
+            --accent-color-2: #FF00FF; /* Magenta vibrante */
+            --text-color-light: #E0E0FF; /* Texto claro */
+            --text-color-dark: #A0A0FF; /* Texto um pouco mais escuro */
+            --border-color: #00BFFF;
+/* Borda azul brilhante */
+            --shadow-light: rgba(0, 229, 255, 0.2);
+--shadow-medium: rgba(0, 229, 255, 0.4);
+            --shadow-heavy: rgba(0, 229, 255, 0.6);
+            --white-color: #FFFFFF;
+/* Branco puro */
+            --radio-text-color-subtle: #8888AA;
+/* Cor para mensagens de rádio */
+            --error-color: #FF6347;
+/* Vermelho tomate para erros */
+            --construction-banner-bg: #FFD700;
+/* Dourado para o banner de construção */
+            --construction-banner-text: #333333;
+/* Texto escuro para o banner */
+        }
+
+        /* Video Player Styles */
+        #top-right-video-container {
+            position: fixed;
+            top: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            width: 360px;
+            z-index: 1000; /* Ensure it's above other content */
+            background-color: var(--primary-bg); /* Optional: to match page background */
+            padding: 10px; /* Increased padding */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3); /* Using theme shadow */
+            border: 1px solid var(--border-color); /* Consistent border */
+        }
+
+        #top-right-video-container video {
+            display: block; /* Remove extra space below video */
+            width: 100%; /* Make video responsive within container */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 4px; /* Slightly rounded corners for the video */
+        }
+
+        .video-caption {
+            text-align: center;
+            color: var(--accent-color-1); /* Using accent color for caption */
+            font-size: 1rem; /* Slightly larger caption */
+            margin-top: 8px; /* Increased margin */
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px var(--shadow-light); /* Adding text shadow */
+        }
+
+
+        /* Base */
+        * {
+            margin: 0;
+padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+overflow-y: scroll; /* Garante que o scroll vertical esteja no elemento html e evita saltos */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+background-color: var(--primary-bg);
+            color: var(--text-color-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+color: var(--accent-color-1);
+            text-shadow: 0 0 8px var(--shadow-light);
+        }
+
+        section {
+            padding: 5rem 2rem;
+max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+/* Adicionado para conter transbordamento horizontal dentro das seções */
+        }
+
+        section h2 {
+            text-align: center;
+margin-bottom: 3rem;
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 15px;
+}
+
+        section h2::after {
+            content: '';
+position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color-2);
+            box-shadow: 0 0 10px var(--accent-color-2);
+}
+
+        /* Keyframe Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseBorder {
+            0% { border-color: var(--border-color);
+box-shadow: 0 0 5px var(--border-color); }
+            50% { border-color: var(--accent-color-2);
+box-shadow: 0 0 15px var(--accent-color-2); }
+            100% { border-color: var(--border-color);
+box-shadow: 0 0 5px var(--border-color); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px var(--accent-color-1);
+}
+            50% { text-shadow: 0 0 15px var(--accent-color-1), 0 0 25px var(--accent-color-1);
+}
+            100% { text-shadow: 0 0 5px var(--accent-color-1);
+}
+        }
+
+        /* Header */
+        header {
+            background: var(--secondary-bg);
+padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 15px var(--shadow-medium);
+}
+
+        nav {
+            display: flex;
+justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color-1);
+            text-shadow: 0 0 10px var(--shadow-light);
+}
+
+        .nav-links {
+            display: flex;
+list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+}
+
+        .nav-links a {
+            color: var(--text-color-light);
+text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+}
+
+        .nav-links a::after {
+            content: '';
+position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color-2);
+            transition: width 0.3s ease;
+}
+
+        .nav-links a:hover, .nav-links a:focus-visible {
+            color: var(--accent-color-2);
+text-shadow: 0 0 10px var(--accent-color-2);
+        }
+
+        .nav-links a:hover::after, .nav-links a:focus-visible::after {
+            width: 100%;
+}
+
+        /* Header Bottom Section (Radio Player, Ad, Visit Counter) */
+        .header-bottom-section {
+            background: var(--primary-bg);
+padding: 0.8rem 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+/* Ajustado para espaçar os itens */
+            align-items: center;
+gap: 1rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 15px var(--shadow-medium);
+            width: 100%;
+flex-wrap: wrap; /* Permite que os itens quebrem linha em telas menores */
+        }
+
+        .radio-player-container {
+            flex-grow: 1;
+text-align: center;
+            min-width: 250px; /* Garante que não fique muito pequeno */
+        }
+
+        .radio-player-container h3 {
+            font-size: 1.1rem;
+margin-bottom: 0.5rem;
+            color: var(--accent-color-1);
+}
+
+        .radio-player-container select {
+            background-color: var(--surface-color);
+color: var(--text-color-light);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            appearance: none;
+/* Remove default arrow */
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%2300E5FF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+background-repeat: no-repeat;
+            background-position: right 0.7em top 50%, 0 0;
+            background-size: 0.65em auto, 100%;
+            cursor: pointer;
+transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .radio-player-container select:hover {
+            border-color: var(--accent-color-2);
+}
+
+        #playerContainer {
+            margin-top: 0.5rem;
+}
+
+        #playerContainer audio {
+            width: 100%;
+max-width: 300px; /* Limita o tamanho do player */
+            margin: 0.5rem auto 0 auto;
+/* Estilos para o player de áudio, se necessário, podem ser ajustados aqui */
+            /* Exemplo de filtro para combinar com o tema (pode precisar de ajustes): */
+            /* filter: invert(100%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(100%); */
+}
+        .radio-info-message { /* Estilo para a mensagem inicial e de erro do player */
+            color: var(--radio-text-color-subtle);
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+
+        .additional-space {
+            background-color: var(--surface-color);
+padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 10px var(--shadow-light);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-color-dark);
+flex-shrink: 0;
+            flex-grow: 1; /* Permite que cresça um pouco */
+            min-width: 180px;
+/* Garante que não fique muito pequeno */
+        }
+
+        /* Contador de visitas no topo */
+        .top-visit-counter-container {
+            background-color: var(--surface-color);
+padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 15px var(--shadow-medium);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+font-size: 1rem;
+            color: var(--text-color-light);
+            flex-shrink: 0;
+        }
+
+        .top-visit-counter-container i {
+            color: var(--accent-color-1);
+font-size: 1.1rem;
+}
+
+        /* Faixa de construção */
+        .construction-banner {
+            background-color: var(--construction-banner-bg);
+color: var(--construction-banner-text);
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            position: relative;
+z-index: 10; /* Garante que fique acima de outros elementos */
+        }
+        .construction-banner p {
+            margin: 0;
+}
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #001A33 100%);
+padding: 8rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+/* Adicionado para conter o pseudo-elemento ::before */
+        }
+
+        .hero::before {
+            content: '';
+position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+background: radial-gradient(circle at center, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: 0;
+}
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg);
+}
+            to { transform: rotate(360deg);
+}
+        }
+
+        .hero-content {
+            position: relative;
+z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+margin-bottom: 1rem;
+            animation: glow 2s infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+color: var(--text-color-dark);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+}
+
+        .cta-button {
+            display: inline-block;
+background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            color: var(--white-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+}
+
+        .cta-button::before {
+            content: '';
+position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+transition: width 0.4s ease-out, height 0.4s ease-out;
+            opacity: 0;
+        }
+
+        .cta-button:hover::before {
+            width: 200%;
+height: 200%;
+            opacity: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+box-shadow: 0 10px 30px var(--shadow-heavy);
+        }
+
+        /* Cards (Produtos, Serviços, Pagamento) */
+        .produtos-grid, .servicos-grid, .pagamento-opcoes {
+            display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .produto-card, .servico-card, .pagamento-card {
+            background: var(--surface-color);
+border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+position: relative;
+            overflow: hidden;
+            animation: fadeInScale 0.8s ease-out forwards;
+            opacity: 0;
+/* Initial state for JS animation */
+            transform: translateY(30px) scale(0.95);
+/* Initial state for JS animation */
+        }
+
+        .produto-card::before, .servico-card::before, .pagamento-card::before {
+            content: '';
+position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease-out;
+}
+
+        .produto-card:hover::before, .servico-card:hover::before, .pagamento-card:hover::before {
+            transform: translateX(0%);
+}
+
+        .produto-card:hover, .servico-card:hover, .pagamento-card:hover {
+            transform: translateY(-10px) scale(1.02);
+box-shadow: 0 15px 30px var(--shadow-medium);
+            border-color: var(--accent-color-2);
+        }
+
+        .produto-img, .pagamento-icon {
+            font-size: 3.5rem;
+margin-bottom: 1rem;
+            color: var(--accent-color-1);
+            text-shadow: 0 0 10px var(--shadow-light);
+            transition: transform 0.3s ease;
+}
+
+        .produto-card:hover .produto-img, .pagamento-card:hover .pagamento-icon {
+            transform: scale(1.1) rotate(5deg);
+}
+
+        .produto-card h3, .servico-card h3, .pagamento-card h3 {
+            font-size: 1.8rem;
+margin-bottom: 0.8rem;
+            color: var(--accent-color-1);
+}
+
+        .produto-card p, .servico-card p, .pagamento-card p {
+            color: var(--text-color-dark);
+font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preco, .servico-preco {
+            font-size: 2rem;
+font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color-2);
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+        .btn-comprar {
+            background: linear-gradient(45deg, var(--accent-color-2), var(--accent-color-1));
+color: var(--white-color);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+
+        .btn-comprar:hover {
+            transform: translateY(-3px) scale(1.05);
+box-shadow: 0 5px 20px rgba(255, 0, 255, 0.6);
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--surface-color);
+border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: var(--text-color-dark);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+padding: 1rem;
+            border: 1px solid var(--border-color);
+            height: 250px; /* Increased height for better visual */
+            animation: fadeInScale 0.8s ease-out forwards;
+opacity: 0; /* Initial state for JS animation */
+            transform: translateY(30px) scale(0.95);
+/* Initial state for JS animation */
+        }
+
+        .portfolio-item::before { /* Image placeholder area */
+            content: "🌌";
+/* Futuristic icon */
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+/* Occupies top part of the card */
+            background-color: var(--primary-bg); /* Placeholder background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+font-size: 4rem; /* Size of the placeholder icon */
+            color: var(--accent-color-1);
+            border-bottom: 1px solid var(--border-color);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+transition: all 0.4s ease;
+            text-shadow: 0 0 10px var(--shadow-light);
+        }
+
+        .portfolio-item-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            z-index: 2;
+position: relative;
+            margin-top: auto;
+            color: var(--text-color-light); /* Default text color */
+            transition: color 0.3s ease;
+}
+
+        .portfolio-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px var(--shadow-medium);
+            border-color: var(--accent-color-2);
+        }
+
+        .portfolio-item:hover::before {
+            background-color: var(--accent-color-2);
+/* Change placeholder background on hover */
+            color: var(--white-color); /* Change icon color on hover */
+            box-shadow: inset 0 0 20px rgba(255, 0, 255, 0.5);
+}
+
+        .portfolio-item:hover .portfolio-item-text {
+            color: var(--accent-color-1);
+            text-shadow: 0 0 8px var(--accent-color-1);
+        }
+
+        /* Pagamento */
+        .pagamento {
+            background: var(--secondary-bg);
+border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 25px var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+
+        .payment-intro-text {
+            text-align: center;
+font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-color-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg);
+            color: var(--text-color-dark);
+            text-align: center;
+padding: 4rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -5px 20px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+}
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-title {
+            color: var(--accent-color-1);
+            margin-bottom: 2.5rem;
+font-size: 2.5rem;
+            text-shadow: 0 0 10px var(--shadow-light);
+        }
+
+        .contato-info {
+            display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+}
+
+        .contato-info div {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px var(--shadow-light);
+transition: all 0.3s ease;
+        }
+
+        .contato-info div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+            border-color: var(--accent-color-2);
+}
+
+        .contato-info h3 {
+            color: var(--accent-color-1);
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .contato-info p {
+            font-size: 0.95rem;
+            color: var(--text-color-dark);
+}
+
+        .footer-copyright-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color-dark);
+            font-size: 0.9rem;
+            display: flex;
+/* Usar flexbox para alinhar conteúdo interno */
+            flex-direction: column; /* Empilhar o drone e o copyright */
+            align-items: center;
+/* Centralizar horizontalmente */
+            gap: 1.5rem; /* Espaçamento entre os blocos */
+        }
+
+        /* Estilo para o ícone do drone no rodapé (separado do contador) */
+        .footer-drone-icon-only {
+            font-size: 2rem;
+color: var(--accent-color-1);
+            text-shadow: 0 0 8px var(--shadow-light);
+            /* Se quiser que ele volte a ser fixed, adicione: */
+            /* position: fixed;
+bottom: 20px;
+right: 20px;
+z-index: 1001; */
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+align-items: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+                margin-top: 1rem;
+}
+
+            .nav-links li {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+}
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .header-bottom-section {
+                flex-direction: column;
+                padding: 1rem;
+gap: 1.5rem; /* Aumenta o gap quando os itens empilham */
+            }
+
+            .radio-player-container, .additional-space, .top-visit-counter-container {
+                width: 100%;
+/* Ocupa a largura total quando empilhado */
+                max-width: none;
+            }
+
+            .produto-card, .servico-card, .pagamento-card, .portfolio-item {
+                padding: 1.5rem;
+            }
+
+            .produto-card h3, .servico-card h3, .pagamento-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .preco, .servico-preco {
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .footer-title {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .radio-player-container select {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .top-visit-counter-container {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+            .additional-space {
+                font-size: 0.8rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="top-right-video-container">
+        <video src="droneshopmatinhos1.mp4" width="360" height="360" autoplay muted loop playsinline></video>
+        <p class="video-caption">Drone Shop Matinhos</p>
+    </div>
+    <div class="construction-banner">
+        <p>🚧 Site em construção e otimização! Algumas funcionalidades podem estar indisponíveis ou em teste. 🚧</p>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">DRONE SHOP MATINHOS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#pagamento">Pagamento</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="header-bottom-section">
+            <div class="radio-player-container">
+                <h3>Drone Shop Radios</h3>
+                <select id="radioSelector">
+                    <option value="" disabled selected>Selecione uma rádio</option>
+                    <option value="https://27393.live.streamtheworld.com/RADIO_89FM_SC" data-type="audio">89 Rádio Rock FM SC</option>
+                    <option value="https://24283.live.streamtheworld.com/MIXFM_SAOPAULOAAC_SC" data-type="audio">MIX FM Sao Paulo FM</option>
+                    <option value="https://stream-163.zeno.fm/c45wbq2us3buv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJjNDV3YnEydXMzYnV2IiwiaG9zdCI6InN0cmVhbS0xNjMuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6ImFRWTZSc1NOUUhpR2YzUVJlNVhDbVEiLCJpYXQiOjE3NTE3MjQ4NDMsImV4cCI6MTc1MTcyNDkwM30.TSCzuRrfgph-U-9GGUpUrHgoHYOnJnVyGjPokh61qZc" data-type="audio">Jovem Pan FM</option>
+                </select>
+                <div id="playerContainer">
+                    </div>
+            </div>
+            <div class="additional-space">
+                <h3>Anúncio/Destaque</h3>
+                <p>Espaço para promoções ou informações importantes!</p>
+            </div>
+            <div class="top-visit-counter-container">
+                <i class="fas fa-users"></i>
+                <span>Visitas: <span id="visit-count">0</span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>DRONE SHOP MATINHOS</h1>
+                <p>Sua melhor escolha em drones no litoral paranaense. Tecnologia de ponta e serviços especializados.</p>
+                <a href="#contato" class="cta-button">Entre em Contato</a>
+            </div>
+        </section>
+
+        <section id="produtos">
+            <h2>Nossos Produtos</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <i class="fas fa-drone produto-img"></i>
+                    <h3>DJI Mini 3 Pro</h3>
+                    <p>Compacto, potente e com câmera de alta qualidade. Perfeito para criadores de conteúdo e viajantes.</p>
+                    <span class="preco">R$ 6.999</span>
+                    <button class="btn-comprar">Ver Detalhes</button>
+                </div>
+                <div class="produto-card">
+                    <i class="fas fa-shipping-fast produto-img"></i>
+                    <h3>DJI Air 2S</h3>
+                    <p>Desempenho elevado, sensor de 1 polegada e recursos inteligentes. Ideal para entusiastas e semi-profissionais.</p>
+                    <span class="preco">R$ 9.499</span>
+                    <button class="btn-comprar">Ver Detalhes</button>
+                </div>
+                <div class="produto-card">
+                    <i class="fas fa-rocket produto-img"></i>
+                    <h3>DJI Mavic 3</h3>
+                    <p>Qualidade de imagem cinematográfica com Hasselblad, longo alcance e bateria de longa duração. Para profissionais exigentes.</p>
+                    <span class="preco">R$ 19.999</span>
+                    <button class="btn-comprar">Ver Detalhes</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicos">
+            <h2>Nossos Serviços</h2>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <i class="fas fa-camera-retro produto-img"></i>
+                    <h3>Fotografia Aérea</h3>
+                    <p>Captura de imagens aéreas de alta resolução para imóveis, eventos, turismo e publicidade.</p>
+                    <span class="servico-preco">A partir de R$ 300</span>
+                    <button class="btn-comprar">Solicitar Orçamento</button>
+                </div>
+                <div class="servico-card">
+                    <i class="fas fa-video product-img"></i>
+                    <h3>Filmagem Aérea</h3>
+                    <p>Produção de vídeos aéreos para documentários, inspeções, eventos esportivos e muito mais.</p>
+                    <span class="servico-preco">A partir de R$ 450</span>
+                    <button class="btn-comprar">Solicitar Orçamento</button>
+                </div>
+                <div class="servico-card">
+                    <i class="fas fa-wrench product-img"></i>
+                    <h3>Manutenção de Drones</h3>
+                    <p>Serviço especializado de manutenção e reparo para diversos modelos de drones DJI.</p>
+                    <span class="servico-preco">Consulte-nos</span>
+                    <button class="btn-comprar">Solicitar Orçamento</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2>Nosso Portfólio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Imóveis de Luxo</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Eventos e Festas</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Inspeções Industriais</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Turismo Litorâneo</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pagamento">
+            <h2>Formas de Pagamento</h2>
+            <p class="payment-intro-text">Oferecemos diversas opções para facilitar sua compra ou contratação de serviços.</p>
+            <div class="pagamento-opcoes">
+                <div class="pagamento-card">
+                    <i class="fas fa-qrcode pagamento-icon"></i>
+                    <h3>Pix</h3>
+                    <p>Pagamento instantâneo e seguro.</p>
+                </div>
+                <div class="pagamento-card">
+                    <i class="fas fa-barcode pagamento-icon"></i>
+                    <h3>Boleto Bancário</h3>
+                    <p>Opção prática para pagamento à vista.</p>
+                </div>
+                <div class="pagamento-card">
+                    <i class="fas fa-credit-card pagamento-icon"></i>
+                    <h3>Cartão de Crédito</h3>
+                    <p>Parcelamento em até 12x sem juros (verifique condições).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato">
+            <h2>Entre em Contato</h2>
+            <div class="contato-info">
+                <div>
+                    <h3><i class="fas fa-map-marker-alt"></i> Endereço</h3>
+                    <p>Rua Exemplo, 123 - Centro<br>Matinhos, PR - Brasil</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-phone"></i> Telefone</h3>
+                    <p>(41) 99999-9999</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-envelope"></i> E-mail</h3>
+                    <p>contato@droneshopmatinhos.com.br</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h2 class="footer-title">DRONE SHOP MATINHOS</h2>
+            <div class="contato-info">
+                <div>
+                    <h3><i class="fas fa-map-marker-alt"></i> Localização</h3>
+                    <p>Matinhos, Litoral Paranaense</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-envelope"></i> Fale Conosco</h3>
+                    <p>contato@droneshopmatinhos.com.br</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-phone"></i> Suporte</h3>
+                    <p>(41) 99999-9999</p>
+                </div>
+            </div>
+            <div class="footer-copyright-section">
+                <div class="footer-drone-icon-only">
+                    <i class="fas fa-drone"></i>
+                </div>
+                <p>&copy; 2023 Drone Shop Matinhos. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const App = {
+            UI: {
+                initSmoothScrolling: function() {
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            const targetElement = document.querySelector(this.getAttribute('href'));
+                            if (targetElement) {
+                                targetElement.scrollIntoView({
+                                    behavior: 'smooth'
+                                });
+                            }
+                        });
+                    });
+                },
+
+                initIntersectionObserver: function() {
+                    const cards = document.querySelectorAll('.produto-card, .servico-card, .pagamento-card, .portfolio-item');
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.1
+                    };
+
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.style.animation = 'fadeInScale 0.8s ease-out forwards';
+                                // No longer unobserving here to allow re-animation if element scrolls out and back in
+                                // To re-enable unobserving: observer.unobserve(entry.target);
+                            } else {
+                                // Optionally reset for re-animation when scrolling back into view
+                                entry.target.style.opacity = '0';
+                                entry.target.style.transform = 'translateY(30px) scale(0.95)';
+                                entry.target.style.animation = 'none';
+                            }
+                        });
+                    }, observerOptions);
+
+                    cards.forEach(card => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(30px) scale(0.95)';
+                        card.style.animation = 'none';
+                        observer.observe(card);
+                    });
+                },
+                initializeRadioPlayerMessage: function() {
+                    const playerContainer = document.getElementById('playerContainer');
+                    if(playerContainer && (playerContainer.innerHTML.trim() === '' || (playerContainer.firstChild?.nodeName === '#text' && playerContainer.firstChild?.textContent.trim() === ''))) {
+                        playerContainer.innerHTML = `<p class="radio-info-message">Escolha uma rádio para ouvir.</p>`;
+                    }
+                }
+            },
+
+            initRadioPlayer: function() {
+                const radioSelector = document.getElementById('radioSelector');
+                const playerContainer = document.getElementById('playerContainer');
+
+                if (!radioSelector || !playerContainer) {
+                    console.error("Radio selector or player container not found.");
+                    return;
+                }
+
+                radioSelector.addEventListener('change', function() {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const streamUrl = selectedOption.value;
+
+                    playerContainer.innerHTML = ''; // Clear previous player or message
+
+                    if (streamUrl) {
+                        const audioPlayer = document.createElement('audio');
+                        audioPlayer.setAttribute('controls', '');
+                        audioPlayer.setAttribute('autoplay', 'true'); // Autoplay when a new station is selected
+                        audioPlayer.style.width = '100%';
+                        audioPlayer.style.maxWidth = '300px'; // Consistent with CSS
+                        audioPlayer.style.marginTop = '0.5rem';
+
+
+                        const sourceElement = document.createElement('source');
+                        sourceElement.setAttribute('src', streamUrl);
+                        // The browser will attempt to determine the type.
+                        // If you have issues, you might need to specify type e.g. sourceElement.setAttribute('type', 'audio/aac');
+
+                        audioPlayer.appendChild(sourceElement);
+                        playerContainer.appendChild(audioPlayer);
+
+                        // Fallback message if audio cannot play (e.g. unsupported format)
+                        audioPlayer.appendChild(document.createTextNode('Seu navegador não suporta o elemento de áudio.'));
+
+
+                        audioPlayer.addEventListener('error', function(e) {
+                            console.error('Error loading audio stream:', e);
+                            let errorMessage = "Erro ao carregar a rádio. ";
+                            switch (e.target.error.code) {
+                                case e.target.error.MEDIA_ERR_ABORTED:
+                                    errorMessage += 'A reprodução foi abortada.';
+                                    break;
+                                case e.target.error.MEDIA_ERR_NETWORK:
+                                    errorMessage += 'Problema de rede impediu o carregamento.';
+                                    break;
+                                case e.target.error.MEDIA_ERR_DECODE:
+                                    errorMessage += 'Erro ao decodificar o áudio.';
+                                    break;
+                                case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                                    errorMessage += 'Formato de áudio não suportado ou URL inválida.';
+                                    break;
+                                default:
+                                    errorMessage += 'Ocorreu um erro desconhecido.';
+                                    break;
+                            }
+                            playerContainer.innerHTML = `<p class="radio-info-message" style="color: var(--error-color);">${errorMessage} Tente outra estação.</p>`;
+                        });
+                         audioPlayer.load(); // Explicitly load the audio
+                         audioPlayer.play().catch(error => {
+                            console.warn("Autoplay foi bloqueado pelo navegador. O usuário precisará iniciar manualmente.", error);
+                            // You could show a message here if autoplay is blocked, though modern browsers often require user interaction.
+                            // The 'controls' attribute allows the user to play manually.
+                        });
+
+                    } else {
+                        App.UI.initializeRadioPlayerMessage(); // Show initial message if "Selecione uma rádio" is chosen
+                    }
+                });
+            },
+
+            initVisitCounter: function() {
+                const visitCounterElement = document.getElementById('visit-count');
+                if (!visitCounterElement) {
+                    console.error("Elemento 'visit-count' não encontrado no DOM.");
+                    return;
+                }
+                try {
+                    let visitCount = parseInt(localStorage.getItem('visitCountDSM')) || 0;
+                    visitCount++;
+                    localStorage.setItem('visitCountDSM', visitCount.toString());
+                    visitCounterElement.textContent = visitCount;
+                } catch (e) {
+                    console.error("Não foi possível acessar o localStorage (talvez o modo de navegação anônima ou cookies desabilitados):", e);
+                    visitCounterElement.textContent = "N/A";
+                }
+            },
+
+            init: function() {
+                this.initVisitCounter();
+                this.UI.initSmoothScrolling();
+                this.UI.initIntersectionObserver();
+                this.UI.initializeRadioPlayerMessage();
+                this.initRadioPlayer();
+            }
+        };
+
+        // DOMContentLoaded para garantir que o DOM está pronto
+        if (document.readyState === 'loading') { // Ainda carregando
+            document.addEventListener('DOMContentLoaded', App.init.bind(App));
+        } else { // `DOMContentLoaded` já disparou
+            App.init();
+        }
+    </script>
+</body>
+</html>
