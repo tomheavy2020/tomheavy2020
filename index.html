@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Shop Matinhos - Sua melhor escolha em drone</title>
+
+    <meta name="description" content="Drone Shop Matinhos: Sua melhor escolha em drones no litoral paranaense. Venda de drones DJI, serviços de fotografia e filmagem aérea para imóveis, eventos e empresas.">
+    <meta name="keywords" content="drones, Matinhos, litoral paranaense, fotografia aérea, filmagem aérea, DJI, aluguel de drones, serviços com drones, loja de drones, orçamento, Pix, boleto, cartão de crédito">
+    <meta name="author" content="Drone Shop Matinhos">
+
+    <meta property="og:title" content="Drone Shop Matinhos - Sua melhor escolha em drone">
+    <meta property="og:description" content="Sua loja especializada em drones e serviços de
+fotografia aérea no litoral paranaense. DJI Mini, Air, Mavic e mais!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.droneshopmatinhos.com.br/">
+    <meta property="og:image" content="https://www.droneshopmatinhos.com.br/images/social-share-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Drone Shop Matinhos - Sua melhor escolha em drone">
+    <meta name="twitter:description" content="Sua loja especializada em drones e serviços de fotografia aérea no litoral paranaense.
+DJI Mini, Air, Mavic e mais!">
+    <meta name="twitter:image" content="https://www.droneshopmatinhos.com.br/images/social-share-image.jpg">
+    <link rel="canonical" href="https://www.droneshopmatinhos.com.br/">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variáveis CSS para um tema futurista */
+        :root {
+            --primary-bg: #0A0A1A; /* Fundo principal escuro */
+            --secondary-bg: #1A1A3A; /* Fundo secundário mais claro */
+
+            --surface-color: #2A2A4A; /* Cor de superfície para cards */
+            --accent-color-1: #00E5FF; /* Azul ciano vibrante */
+            --accent-color-2: #FF00FF; /* Magenta vibrante */
+            --text-color-light: #E0E0FF; /* Texto claro */
+            --text-color-dark: #A0A0FF;
+ /* Texto um pouco mais escuro */
+            --border-color: #00BFFF;
+ /* Borda azul brilhante */
+            --shadow-light: rgba(0, 229, 255, 0.2);
+ --shadow-medium: rgba(0, 229, 255, 0.4);
+            --shadow-heavy: rgba(0, 229, 255, 0.6);
+            --white-color: #FFFFFF;
+ /* Branco puro */
+            --radio-text-color-subtle: #8888AA;
+ /* Cor para mensagens de rádio */
+            --error-color: #FF6347;
+ /* Vermelho tomate para erros */
+            --construction-banner-bg: #FFD700;
+ /* Dourado para o banner de construção */
+            --construction-banner-text: #333333;
+ /* Texto escuro para o banner */
+
+            /* Cores para o efeito de fogo */
+            --fire-red: #FF4500;
+ /* OrangeRed */
+            --fire-orange: #FFA500;
+ /* Orange */
+            --fire-yellow: #FFFF00;
+ /* Yellow */
+        }
+
+        /* Video Player Styles - AGORA DENTRO DO FLUXO DO DOCUMENTO */
+        #top-right-video-container {
+            width: auto;
+ /* Permite que o flexbox controle a largura */
+            min-width: 200px;
+ /* Largura mínima para o vídeo */
+            flex-grow: 1;
+ /* Permite que o vídeo cresça e ocupe espaço */
+            background-color: var(--primary-bg);
+ padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+            border: 1px solid var(--border-color);
+ transition: box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.5s ease;
+ /* Transições para closing */
+            position: relative;
+ /* Necessário para posicionar o botão de fechar e redimensionador */
+            margin: auto;
+ /* Ajuda a centralizar se houver espaço extra */
+        }
+
+        /* Removido: Efeito de fogo ao arrastar e keyframes relacionados */
+        /* Removido: Cursor de redimensionamento e efeito de arrastar */
+
+        /* Efeito de fechar a janela do vídeo */
+        #top-right-video-container.closing {
+            animation: fadeOutShrink 0.5s forwards ease-out;
+ }
+
+        @keyframes fadeOutShrink {
+            from {
+                opacity: 1;
+ transform: scale(1);
+            }
+            to {
+                opacity: 0;
+ transform: scale(0.8); /* Encolhe para 80% do tamanho */
+            }
+        }
+
+        #top-right-video-container video {
+            display: block;
+ width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .video-caption {
+            text-align: center;
+ color: var(--accent-color-1);
+            font-size: 1rem;
+            margin-top: 8px;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px var(--shadow-light);
+ }
+
+        /* Botão de Fechar Vídeo */
+        #close-video-button {
+            position: absolute;
+ top: 5px; /* Distância do topo */
+            right: 5px;
+ /* Distância da direita */
+            background-color: rgba(0, 0, 0, 0.6);
+ /* Fundo semi-transparente */
+            color: var(--white-color);
+ border: 1px solid var(--border-color);
+            border-radius: 50%; /* Torna o botão circular */
+            width: 25px;
+ /* Largura */
+            height: 25px;
+ /* Altura */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+ font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001; /* Garante que esteja acima do contêiner do vídeo */
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+ }
+
+        #close-video-button:hover {
+            background-color: var(--accent-color-2);
+ /* Cor ao passar o mouse */
+            border-color: var(--accent-color-1);
+ }
+
+        /* NOVO: Puxador de redimensionamento - Removido pois não será mais resizable */
+        .resize-handle {
+            display: none;
+ /* Oculta o puxador de redimensionamento */
+        }
+
+
+        /* Base */
+        * {
+            margin: 0;
+ padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+ overflow-y: scroll; /* Garante que o scroll vertical esteja no elemento html e evita saltos */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+ background-color: var(--primary-bg);
+            color: var(--text-color-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+ color: var(--accent-color-1);
+            text-shadow: 0 0 8px var(--shadow-light);
+        }
+
+        section {
+            padding: 5rem 2rem;
+ max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+ /* Adicionado para conter transbordamento horizontal dentro das seções */
+        }
+
+        section h2 {
+            text-align: center;
+ margin-bottom: 3rem;
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 15px;
+ }
+
+        section h2::after {
+            content: '';
+ position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color-2);
+            box-shadow: 0 0 10px var(--accent-color-2);
+ }
+
+        /* Keyframe Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+ transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+ transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseBorder {
+            0% { border-color: var(--border-color);
+ box-shadow: 0 0 5px var(--border-color); }
+            50% { border-color: var(--accent-color-2);
+ box-shadow: 0 0 15px var(--accent-color-2); }
+            100% { border-color: var(--border-color);
+ box-shadow: 0 0 5px var(--border-color); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px var(--accent-color-1);
+ }
+            50% { text-shadow: 0 0 15px var(--accent-color-1), 0 0 25px var(--accent-color-1);
+ }
+            100% { text-shadow: 0 0 5px var(--accent-color-1);
+ }
+        }
+
+        /* Header */
+        header {
+            background: var(--secondary-bg);
+ padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 15px var(--shadow-medium);
+ }
+
+        nav {
+            display: flex;
+ justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+ font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color-1);
+            text-shadow: 0 0 10px var(--shadow-light);
+ }
+
+        .nav-links {
+            display: flex;
+ list-style: none;
+            align-items: center; /* Alinha os itens verticalmente no centro */
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+ }
+
+        .nav-links a {
+            color: var(--text-color-light);
+ text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+ }
+
+        .nav-links a::after {
+            content: '';
+ position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+ /* Gradiente na linha */
+            transition: width 0.3s ease;
+ }
+
+        .nav-links a:hover, .nav-links a:focus-visible {
+            color: var(--accent-color-2);
+ text-shadow: 0 0 10px var(--accent-color-2);
+        }
+
+        .nav-links a:hover::after, .nav-links a:focus-visible::after {
+            width: 100%;
+ }
+
+        /* Estilo para o novo botão "Jogos Arcade Passatempo" */
+        .arcade-button-item {
+            margin-left: 0 !important;
+ /* Remove margem esquerda para ser o primeiro */
+            margin-right: 2.5rem;
+ /* Adiciona margem direita para separar dos outros links */
+        }
+
+        .arcade-button-link {
+            background: linear-gradient(90deg, var(--accent-color-2), var(--accent-color-1));
+ /* Gradiente vibrante */
+            color: var(--white-color) !important;
+ /* Cor do texto branca, importante para sobrescrever */
+            padding: 0.4rem 0.8rem;
+ /* Padding menor para diminuir o tamanho */
+            border-radius: 30px;
+ font-weight: bold;
+            text-transform: uppercase;
+            /* letter-spacing: 1px; */ /* Removido para usar espaçamento normal da fonte */
+
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+ /* Sombra inicial para efeito de brilho */
+            transition: all 0.3s ease;
+ animation: arcadePulse 2s infinite alternate; /* Animação de pulsação */
+
+            /* Propriedades para centralizar o texto */
+            display: flex;
+ justify-content: center;
+            align-items: center;
+            text-align: center; /* Adicionado para garantir centralização do texto */
+            transform: translateX(1px);
+ /* Pequeno ajuste visual para mover 1px para a direita */
+
+            border: 2px solid var(--white-color);
+ /* Borda branca para destaque */
+            text-shadow: 0 0 8px rgba(0,0,0,0.5);
+ /* Sombra no texto */
+            font-size: 0.8rem;
+ /* Diminui um pouco mais o tamanho da fonte */
+        }
+
+        /* Remove a linha inferior padrão dos links para o botão arcade */
+        .arcade-button-link::after {
+            display: none;
+ }
+
+        .arcade-button-link:hover {
+            transform: scale(1.08) translateY(-2px);
+ /* Aumenta um pouco no hover */
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.8), 0 0 40px rgba(255, 0, 255, 0.8);
+ /* Brilho mais intenso no hover */
+            border-color: var(--accent-color-1);
+ /* Muda a cor da borda no hover */
+            color: var(--white-color) !important;
+ /* Mantém o texto branco no hover */
+        }
+
+        /* Keyframe para a animação de pulsação do botão arcade */
+        @keyframes arcadePulse {
+            0% {
+                transform: scale(1);
+ box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+            }
+            50% {
+                transform: scale(1.02);
+ box-shadow: 0 0 25px rgba(255, 0, 255, 0.8), 0 0 35px rgba(0, 229, 255, 0.8);
+ }
+            100% {
+                transform: scale(1);
+ box-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+            }
+        }
+
+
+        /* Header Bottom Section (Radio Player, Ad, Visit Counter) */
+        .header-bottom-section {
+            background: var(--primary-bg);
+ padding: 0.7rem 1rem; /* Reduzido de 0.8rem 1rem */
+            margin-top: 1rem;
+ border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+ /* Reduzido de 1rem */
+            max-width: 1200px;
+            margin-left: auto;
+ margin-right: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 15px var(--shadow-medium);
+            width: 100%;
+            flex-wrap: wrap;
+ }
+
+        .radio-player-container {
+            flex-grow: 1;
+ text-align: center;
+            min-width: 200px; /* Reduzido de 250px */
+        }
+
+        .radio-player-container h3 {
+            font-size: 1rem;
+ /* Reduzido de 1.1rem */
+            margin-bottom: 0.5rem;
+            color: var(--accent-color-1);
+ }
+
+        .radio-player-container select {
+            background-color: var(--surface-color);
+ color: var(--text-color-light);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem; /* Reduzido de 0.5rem 1rem */
+            border-radius: 5px;
+ font-size: 0.85rem; /* Reduzido de 0.9rem */
+            appearance: none;
+ background-image: url('data:image/svg+xml;utf8,<svg fill="%2300E5FF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+ background-position: right 0.7em top 50%, 0 0;
+            background-size: 0.65em auto, 100%;
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+ }
+
+        .radio-player-container select:hover {
+            border-color: var(--accent-color-2);
+ }
+
+        #playerContainer {
+            margin-top: 0.5rem;
+ }
+
+        #playerContainer audio {
+            width: 100%;
+ max-width: 300px;
+            margin: 0.5rem auto 0 auto;
+        }
+        .radio-info-message {
+            color: var(--radio-text-color-subtle);
+ font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+
+        .additional-space {
+            background-color: var(--surface-color);
+ padding: 0.7rem 1.2rem; /* Reduzido de 0.8rem 1.5rem */
+            border-radius: 8px;
+ border: 1px solid var(--border-color);
+            box-shadow: 0 0 10px var(--shadow-light);
+            text-align: center;
+            font-size: 0.85rem;
+ /* Reduzido de 0.9rem */
+            color: var(--text-color-dark);
+            flex-shrink: 0;
+ flex-grow: 1;
+            min-width: 180px;
+        }
+
+        /* Contador de visitas no topo */
+        .top-visit-counter-container {
+            background-color: var(--surface-color);
+ padding: 0.7rem 1rem; /* Reduzido de 0.8rem 1.2rem */
+            border-radius: 8px;
+ border: 1px solid var(--border-color);
+            box-shadow: 0 0 15px var(--shadow-medium);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+ /* Reduzido de 1rem */
+            color: var(--text-color-light);
+            flex-shrink: 0;
+ }
+
+        .top-visit-counter-container i {
+            color: var(--accent-color-1);
+ font-size: 1rem; /* Reduzido de 1.1rem */
+        }
+
+        /* Faixa de construção */
+        .construction-banner {
+            background-color: var(--construction-banner-bg);
+ color: var(--construction-banner-text);
+            text-align: center;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            position: relative;
+ z-index: 10;
+        }
+        .construction-banner p {
+            margin: 0;
+ }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #001A33 100%);
+ padding: 8rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+ }
+
+        .hero::before {
+            content: '';
+ position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+ background: radial-gradient(circle at center, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: 0;
+ }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg);
+ }
+            to { transform: rotate(360deg);
+ }
+        }
+
+        .hero-content {
+            position: relative;
+ z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+ margin-bottom: 1rem;
+            animation: glow 2s infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+ color: var(--text-color-dark);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+ }
+
+        .cta-button {
+            display: inline-block;
+ background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            color: var(--white-color);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+ transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+ }
+
+        .cta-button::before {
+            content: '';
+ position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+ transition: width 0.4s ease-out, height 0.4s ease-out;
+            opacity: 0;
+        }
+
+        .cta-button:hover::before {
+            width: 200%;
+ height: 200%;
+            opacity: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+ box-shadow: 0 10px 30px var(--shadow-heavy);
+ }
+
+        /* Cards (Produtos, Serviços, Pagamento) */
+        .produtos-grid, .servicos-grid, .pagamento-opcoes {
+            display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .produto-card, .servico-card, .pagamento-card {
+            background: var(--surface-color);
+ border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+ position: relative;
+            overflow: hidden;
+            animation: fadeInScale 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+ }
+
+        .produto-card::before, .servico-card::before, .pagamento-card::before {
+            content: '';
+ position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease-out;
+ }
+
+        .produto-card:hover::before, .servico-card:hover::before, .pagamento-card:hover::before {
+            transform: translateX(0%);
+ }
+
+        .produto-card:hover, .servico-card:hover, .pagamento-card:hover {
+            transform: translateY(-10px) scale(1.02);
+ box-shadow: 0 15px 30px var(--shadow-medium);
+            border-color: var(--accent-color-2);
+        }
+
+        .produto-img, .pagamento-icon {
+            font-size: 3.5rem;
+ margin-bottom: 1rem;
+            color: var(--accent-color-1);
+            text-shadow: 0 0 10px var(--shadow-light);
+            transition: transform 0.3s ease;
+ }
+
+        .produto-card:hover .produto-img, .pagamento-card:hover .pagamento-icon {
+            transform: scale(1.1) rotate(5deg);
+ }
+
+        .produto-card h3, .servico-card h3, .pagamento-card h3 {
+            font-size: 1.8rem;
+ margin-bottom: 0.8rem;
+            color: var(--accent-color-1);
+        }
+
+        .produto-card p, .servico-card p, .pagamento-card p {
+            color: var(--text-color-dark);
+ font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preco, .servico-preco {
+            font-size: 2rem;
+ font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color-2);
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+ }
+
+        .btn-comprar {
+            background: linear-gradient(45deg, var(--accent-color-2), var(--accent-color-1));
+ color: var(--white-color);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+ box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+
+        .btn-comprar:hover {
+            transform: translateY(-3px) scale(1.05);
+ box-shadow: 0 5px 20px rgba(255, 0, 255, 0.6);
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--surface-color);
+ border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: var(--text-color-dark);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+ padding: 1rem;
+            border: 1px solid var(--border-color);
+            height: 250px;
+            animation: fadeInScale 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+ }
+
+        .portfolio-item::before {
+            content: "🌌";
+ display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background-color: var(--primary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+ font-size: 4rem;
+            color: var(--accent-color-1);
+            border-bottom: 1px solid var(--border-color);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            transition: all 0.4s ease;
+ text-shadow: 0 0 10px var(--shadow-light);
+        }
+
+        .portfolio-item-text {
+            font-size: 1.1rem;
+ font-weight: bold;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            margin-top: auto;
+            color: var(--text-color-light);
+            transition: color 0.3s ease;
+ }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px) scale(1.03);
+ box-shadow: 0 15px 30px var(--shadow-medium);
+            border-color: var(--accent-color-2);
+        }
+
+        .portfolio-item:hover::before {
+            background-color: var(--accent-color-2);
+ color: var(--white-color);
+            box-shadow: inset 0 0 20px rgba(255, 0, 255, 0.5);
+ }
+
+        .portfolio-item:hover .portfolio-item-text {
+            color: var(--accent-color-1);
+ text-shadow: 0 0 8px var(--accent-color-1);
+        }
+
+        /* Pagamento */
+        .pagamento {
+            background: var(--secondary-bg);
+ border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 25px var(--shadow-medium);
+            border: 1px solid var(--border-color);
+ }
+
+        .payment-intro-text {
+            text-align: center;
+ font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-color-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg);
+ color: var(--text-color-dark);
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -5px 20px var(--shadow-medium);
+            position: relative;
+ overflow: hidden;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-title {
+            color: var(--accent-color-1);
+            margin-bottom: 2.5rem;
+ font-size: 2.5rem;
+            text-shadow: 0 0 10px var(--shadow-light);
+        }
+
+        .contato-info {
+            display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+ }
+
+        .contato-info div {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px var(--shadow-light);
+ transition: all 0.3s ease;
+        }
+
+        .contato-info div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-medium);
+            border-color: var(--accent-color-2);
+ }
+
+        .contato-info h3 {
+            color: var(--accent-color-1);
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .contato-info p {
+            font-size: 0.95rem;
+            color: var(--text-color-dark);
+ }
+
+        .footer-copyright-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color-dark);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+ align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Estilo para o ícone do drone no rodapé (separado do contador) */
+        .footer-drone-icon-only {
+            font-size: 2rem;
+ color: var(--accent-color-1);
+            text-shadow: 0 0 8px var(--shadow-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+ align-items: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+                margin-top: 1rem;
+ }
+
+            .nav-links li {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+ }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .header-bottom-section {
+                flex-direction: column;
+                padding: 1rem;
+ gap: 1.5rem;
+            }
+
+            .radio-player-container, .additional-space, .top-visit-counter-container, #top-right-video-container {
+                width: 100%;
+                max-width: none;
+                min-width: unset;
+ /* Remove min-width para mobile para que ocupe 100% da largura disponível */
+            }
+
+            /* Adiciona ajuste para o vídeo no mobile */
+            #top-right-video-container video {
+                max-width: 100%;
+ }
+
+            .produto-card, .servico-card, .pagamento-card, .portfolio-item {
+                padding: 1.5rem;
+            }
+
+            .produto-card h3, .servico-card h3, .pagamento-card h3 {
+                font-size: 1.5rem;
+ }
+
+            .preco, .servico-preco {
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .footer-title {
+                font-size: 2rem;
+ }
+
+            /* Mobile responsiveness for the new button */
+            .arcade-button-item {
+                margin: 0 0 1rem 0 !important;
+ /* Ajusta margens para empilhamento vertical */
+                width: fit-content; /* Largura ajustada ao conteúdo */
+            }
+
+            .arcade-button-link {
+                padding: 0.3rem 0.6rem;
+ /* Padding ainda menor para mobile */
+                font-size: 0.75rem; /* Fonte ainda menor para mobile */
+                transform: translateX(0);
+ /* Remove o ajuste de transform para mobile, se necessário */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+ }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+ }
+
+            /* Ajustes para mobile para as seções compactadas */
+            .radio-player-container select {
+                font-size: 0.75rem;
+ /* Ainda menor */
+                padding: 0.3rem 0.6rem; /* Ainda menor */
+            }
+
+            .top-visit-counter-container {
+                font-size: 0.85rem;
+ /* Ainda menor */
+                padding: 0.5rem 0.8rem; /* Ainda menor */
+            }
+
+            .top-visit-counter-container i {
+                font-size: 0.9rem;
+ /* Ajuste do ícone */
+            }
+
+            .additional-space {
+                font-size: 0.75rem; /* Ainda menor */
+                padding: 0.5rem 0.8rem;
+ /* Ainda menor */
+            }
+
+            .radio-player-container h3 {
+                font-size: 0.9rem;
+ /* Ajuste do título da rádio */
+            }
+        }
+
+        .siri-animated-btn {
+            position: relative;
+            background: radial-gradient(circle at 60% 40%, #27b6ff 60%, #8b54ff 100%);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--accent-color-1), 0 0 32px var(--accent-color-2), 0 0 0 0 rgba(39,182,255,0.5);
+            cursor: pointer;
+            overflow: visible;
+            z-index: 9;
+            transition: transform 0.18s;
+        }
+
+        .siri-animated-btn i.fas.fa-microphone {
+            color: #fff;
+            font-size: 1.5rem;
+            z-index: 2;
+            animation: siriMicPulse 2s infinite;
+        }
+
+        @keyframes siriMicPulse {
+            0% { filter: drop-shadow(0 0 4px #27b6ff);}
+            50% { filter: drop-shadow(0 0 14px #8b54ff);}
+            100% { filter: drop-shadow(0 0 4px #27b6ff);}
+        }
+        .siri-animated-btn:active {
+            transform: scale(0.97);
+        }
+
+        .siri-waves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0; top: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .siri-waves::before,
+        .siri-waves::after {
+            content: '';
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            opacity: 0.65;
+            pointer-events: none;
+            animation: siriWaves 1.5s infinite;
+        }
+        .siri-waves::before {
+            width: 48px; height: 48px;
+            background: radial-gradient(circle, #27b6ff40 30%, transparent 70%);
+            animation-delay: 0s;
+        }
+        .siri-waves::after {
+            width: 68px; height: 68px;
+            background: radial-gradient(circle, #8b54ff30 10%, transparent 80%);
+            animation-delay: 0.7s;
+        }
+        @keyframes siriWaves {
+            0% { opacity: 0.65; transform: translate(-50%, -50%) scale(1);}
+            80% {opacity: 0; transform: translate(-50%, -50%) scale(1.55);}
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8);}
+        }
+
+        /* Responsivo */
+        @media (max-width: 480px) {
+            .siri-animated-btn { width: 38px; height: 38px; }
+            .siri-waves::before { width: 38px; height: 38px; }
+            .siri-waves::after  { width: 54px; height: 54px; }
+        }
+
+        /* Gemini Chat Modal Styles */
+        #gemini-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.40);
+            align-items: center; justify-content: center;
+        }
+        #gemini-modal-content {
+            background: var(--secondary-bg, #222249);
+            border-radius: 18px;
+            box-shadow: 0 6px 32px #27b6ff60;
+            padding: 20px 22px 16px 22px;
+            width: 98vw;
+            max-width: 360px;
+            min-height: 340px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            animation: fadeInScale 0.3s;
+        }
+        #gemini-modal-close {
+            position: absolute;
+            top: 8px; right: 12px;
+            border: none; background: none;
+            color: #fff; font-size: 1.4rem;
+            cursor: pointer; z-index: 2;
+        }
+        #gemini-chat-history {
+            flex: 1; overflow-y: auto; background: #191930;
+            border-radius: 10px; margin-bottom: 10px;
+            padding: 1rem 0.7rem; font-size: 1rem;
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        #gemini-chat-history .message.user {
+            align-self: flex-end; background: #00e5ff22; color: #fff;
+            border-radius: 1.2em 0.5em 1.2em 1.2em; padding: 6px 14px;
+        }
+        #gemini-chat-history .message.ai {
+            align-self: flex-start; background: #8b54ff18; color: #baf7ff;
+            border-radius: 0.5em 1.2em 1.2em 1.2em; padding: 6px 14px;
+        }
+        #gemini-chat-form {
+            display: flex; gap: 0.5em;
+        }
+        #gemini-chat-input {
+            flex: 1; font-size: 1em; border: none;
+            background: #161623; color: #fff;
+            padding: 10px 11px; border-radius: 5px;
+            outline: none;
+        }
+        #gemini-chat-form button {
+            background: linear-gradient(90deg,#27b6ff,#8b54ff);
+            border: none; border-radius: 4px;
+            color: #fff; font-size: 1.13em;
+            padding: 0 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #gemini-chat-form button:hover {
+            background: linear-gradient(90deg,#8b54ff,#27b6ff);
+        }
+        @media (max-width:480px) {
+            #gemini-modal-content { width:97vw; min-width:0; padding:12px 6px 10px 6px;}
+            #gemini-chat-history { font-size: 0.93em; }
+        }
+
+        /* Weather Widget Styles */
+        .weather-widget {
+            background-color: var(--surface-color, #232355);
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color, #00BFFF);
+            box-shadow: 0 0 15px var(--shadow-medium, #00e5ff44);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color-light, #E0E0FF);
+            font-weight: 600;
+            font-size: 1rem;
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+        .weather-widget i {
+            color: #27b6ff;
+        }
+        .weather-widget .clima-temp {
+            font-size: 1.27em;
+            font-weight: bold;
+            color: var(--accent-color-1, #00E5FF);
+        }
+        .weather-widget .clima-icon img {
+            width: 28px;
+            vertical-align: middle;
+            margin-bottom: -3px;
+        }
+        @media (max-width: 480px) {
+            .weather-widget { font-size: 0.86rem; padding: 0.5rem 0.7rem; }
+            .weather-widget .clima-icon img { width: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="construction-banner">
+        <p>🚧 Site em construção e otimização!
+ Algumas funcionalidades podem estar indisponíveis ou em teste. 🚧</p>
+    </div>
+    <header>
+        <nav>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button id="siri-btn" aria-label="Assistente virtual" class="siri-animated-btn">
+                    <span class="siri-waves"></span>
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <div class="logo">DRONE SHOP MATINHOS</div>
+            </div>
+            <ul class="nav-links">
+                <li class="arcade-button-item"><a href="arcade-games.html" class="arcade-button-link">Jogos Arcade Passatempo</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#pagamento">Pagamento</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="header-bottom-section">
+            <div class="top-visit-counter-container">
+                <i class="fas fa-users"></i>
+                <span>Visitas: <span id="visit-count">0</span></span>
+            </div>
+            <div class="weather-widget" id="weather-matinhos">
+                <i class="fas fa-location-dot"></i>
+                <span class="clima-info">Matinhos/PR: <span class="clima-temp">--</span>°C <span class="clima-desc"></span></span>
+                <span class="clima-icon" style="margin-left: 5px;"></span>
+            </div>
+            <div class="radio-player-container">
+                <h3>Drone Shop Radios</h3>
+                <select id="radioSelector">
+                    <option value="" disabled selected>Selecione uma rádio</option>
+                    <option value="https://27393.live.streamtheworld.com/RADIO_89FM_SC" data-type="audio">89 Rádio Rock FM SC</option>
+                    <option value="https://24283.live.streamtheworld.com/MIXFM_SAOPAULOAAC_SC" data-type="audio">MIX FM Sao Paulo FM</option>
+                    <option value="https://stream-163.zeno.fm/c45wbq2us3buv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJjNDV3YnEydXMzYnV2IiwiaG9zdCI6InN0cmVhbS0xNjMuemVuby5fmIsInJ0dGwiOjUsImp0aSI6ImFRWTZSc1NOUUhpR2YzUVJlNVhDbVEiLCJpYXQiOjE3NTE3MjQ4NDMsImV4cCI6MTc1MTcyNDkwM30.TSCzuRrfgph-U-9GGUpUrHgoHYOnJnVyGjPokh61qZc" data-type="audio">Jovem Pan FM</option>
+                </select>
+                <div id="playerContainer">
+                </div>
+            </div>
+            <div class="additional-space">
+                <h3>Anúncio/Destaque</h3>
+                <p>Espaço para promoções ou informações importantes!</p>
+            </div>
+            <div id="top-right-video-container">
+                <button id="close-video-button"
+ aria-label="Fechar vídeo">X</button>
+                <video src="droneshopmatinhos1.mp4" width="360" height="360" autoplay muted loop playsinline controls preload="metadata" poster="images/droneshopmatinhos-poster.jpg"></video>
+                <p class="video-caption">Drone Shop Matinhos</p>
+                <div class="resize-handle"></div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>DRONE SHOP MATINHOS</h1>
+                <p>Sua melhor escolha em drones no litoral paranaense.
+ Tecnologia de ponta e serviços especializados.</p>
+                <a href="#contato" class="cta-button">Entre em Contato</a>
+            </div>
+        </section>
+        <section id="produtos">
+            <h2>Nossos Produtos</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <i class="fas fa-drone-alt produto-img"></i>
+                    <h3>DJI Mini 3 Pro</h3>
+                    <p>Compacto, leve e com câmera de 48MP. Ideal para iniciantes e profissionais.</p>
+                    <span class="preco">R$ 5.999</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+                <div class="produto-card">
+                    <i class="fas fa-drone-alt produto-img"></i>
+                    <h3>DJI Mavic 3</h3>
+                    <p>Qualidade de imagem Hasselblad e voo omnidirecional. Perfeito para cinema.</p>
+                    <span class="preco">R$ 15.999</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+                <div class="produto-card">
+                    <i class="fas fa-drone-alt produto-img"></i>
+                    <h3>DJI Air 2S</h3>
+                    <p>Sensor de 1 polegada e detecção de obstáculos em 4 direções. Alta performance.</p>
+                    <span class="preco">R$ 8.999</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+            </div>
+        </section>
+        <section id="servicos">
+            <h2>Nossos Serviços</h2>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <i class="fas fa-camera-retro produto-img"></i>
+                    <h3>Fotografia Aérea Profissional</h3>
+                    <p>Imagens aéreas de alta resolução para imóveis, eventos e marketing.</p>
+                    <span class="servico-preco">A partir de R$ 350</span>
+                    <button class="btn-comprar">Solicitar Orçamento</button>
+                </div>
+                <div class="servico-card">
+                    <i class="fas fa-video product-img"></i>
+                    <h3>Filmagem Aérea para Eventos</h3>
+                    <p>Produções de vídeo aéreas dinâmicas para casamentos, shows e esportes.</p>
+                    <span class="servico-preco">A partir de R$ 500</span>
+                    <button class="btn-comprar">Solicitar Orçamento</button>
+                </div>
+                <div class="servico-card">
+                    <i class="fas fa-building product-img"></i>
+                    <h3>Inspeção e Mapeamento</h3>
+                    <p>Serviços de inspeção de estruturas e mapeamento topográfico com drones.</p>
+                    <span class="servico-preco">A partir de R$ 600</span>
+                    <button class="btn-comprar">Solicitar Orçamento</button>
+                </div>
+            </div>
+        </section>
+        <section id="portfolio">
+            <h2>Nosso Portfólio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Imóveis de Luxo</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Eventos Esportivos</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Casamentos e Festas</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Projetos de Engenharia</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Turismo e Hotelaria</div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-item-text">Comerciais e Marketing</div>
+                </div>
+            </div>
+        </section>
+        <section id="pagamento">
+            <h2>Opções de Pagamento</h2>
+            <p class="payment-intro-text">Facilitamos sua compra com diversas formas de pagamento seguras.</p>
+            <div class="pagamento-opcoes">
+                <div class="pagamento-card">
+                    <i class="fas fa-qrcode pagamento-icon"></i>
+                    <h3>Pix</h3>
+                    <p>Pagamento instantâneo e seguro com QR Code.</p>
+                </div>
+                <div class="pagamento-card">
+                    <i class="fas fa-barcode pagamento-icon"></i>
+                    <h3>Boleto Bancário</h3>
+                    <p>Pague no seu tempo, com flexibilidade e segurança.</p>
+                </div>
+                <div class="pagamento-card">
+                    <i class="fas fa-credit-card pagamento-icon"></i>
+                    <h3>Cartão de Crédito</h3>
+                    <p>Até 12x sem juros nas principais bandeiras.</p>
+                </div>
+            </div>
+        </section>
+        <section id="contato">
+            <h2>Entre em Contato</h2>
+            <div class="contato-info">
+                <div>
+                    <h3><i class="fas fa-map-marker-alt"></i> Endereço</h3>
+                    <p>Rua Exemplo, 123 - Centro<br>Matinhos, PR - Brasil</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-phone"></i> Telefone</h3>
+                    <p>(41) 99876-5432</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-envelope"></i> E-mail</h3>
+                    <p>contato@droneshopmatinhos.com.br</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h2 class="footer-title">DRONE SHOP MATINHOS</h2>
+            <div class="footer-copyright-section">
+                <i class="fas fa-drone footer-drone-icon-only"></i>
+                <p>&copy; 2024 Drone Shop Matinhos. Todos os direitos reservados.</p>
+                <p>Desenvolvido com paixão e tecnologia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="gemini-modal" style="display:none;">
+        <div id="gemini-modal-content">
+            <button id="gemini-modal-close" aria-label="Fechar">&times;</button>
+            <h3 style="text-align:center;color:#27b6ff;margin-bottom:10px;">Assistente Virtual</h3>
+            <div id="gemini-chat-history"></div>
+            <form id="gemini-chat-form" autocomplete="off">
+                <input type="text" id="gemini-chat-input" placeholder="Digite sua pergunta..." required autofocus />
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            // 1. Abrir modal ao clicar no Siri
+            const siriBtn  = document.getElementById('siri-btn');
+            const chatModal= document.getElementById('gemini-modal');
+            const chatClose= document.getElementById('gemini-modal-close');
+            if(siriBtn && chatModal) {
+                siriBtn.addEventListener('click', ()=> { chatModal.style.display = 'flex'; });
+            }
+            if(chatClose) {
+                chatClose.addEventListener('click', ()=> { chatModal.style.display = 'none'; });
+            }
+            // Fecha modal ao clicar fora do conteúdo
+            chatModal.addEventListener('click', function(e){
+                if(e.target===chatModal) chatModal.style.display = 'none';
+            });
+
+            // 2. Chat: mensagem usuário → Gemini → resposta
+            const chatForm  = document.getElementById('gemini-chat-form');
+            const chatInput = document.getElementById('gemini-chat-input');
+            const chatBox   = document.getElementById('gemini-chat-history');
+
+            // Troque SUA_API_KEY/ENDPOINT abaixo por sua URL Gemini ou backend próprio!
+            const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=SUA_API_KEY';
+
+            if(chatForm && chatInput && chatBox) {
+                chatForm.addEventListener('submit', async function(e){
+                    e.preventDefault();
+                    let userMsg = chatInput.value.trim();
+                    if(!userMsg) return;
+                    addMsg(userMsg, 'user');
+                    chatInput.value = '';
+                    chatInput.disabled = true;
+                    await addGeminiResponse(userMsg);
+                    chatInput.disabled = false;
+                    chatInput.focus();
+                });
+            }
+            function addMsg(txt, who='ai') {
+                let div = document.createElement("div");
+                div.className = 'message ' + who;
+                div.textContent = txt;
+                chatBox.appendChild(div);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+            async function addGeminiResponse(prompt) {
+                addMsg('...', 'ai'); // loading
+                // Chamada Google Gemini API oficial (ajuste a URL e a KEY!):
+                try {
+                    const payload = {
+                        contents: [ { parts: [ { text: prompt } ] } ]
+                    };
+                    const resp = await fetch(GEMINI_API_ENDPOINT, {
+                        method: 'POST',
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+                    let json = await resp.json();
+                    // Remove "..." loading
+                    chatBox.querySelector('.message.ai:last-child').remove();
+                    if(json.candidates && json.candidates.length) {
+                        let answer = json.candidates[0].content.parts[0].text || "(Resposta vazia)";
+                        addMsg(answer, 'ai');
+                    } else if(json.error) {
+                        addMsg("Erro na Gemini API: " + (json.error.message||"-"), 'ai');
+                    } else {
+                        addMsg("Desculpe, nenhuma resposta recebida.", 'ai');
+                    }
+                } catch(err) {
+                    chatBox.querySelector('.message.ai:last-child').remove();
+                    addMsg("Erro de conexão ou chave inválida!", 'ai');
+                }
+            }
+
+            // O código JavaScript existente da página foi mantido abaixo, mesclado com as novas funcionalidades
+            const App = {
+                // REMOVIDO: API_BASE_URL (não é mais necessário para o contador de visitas se for no mesmo domínio)
+
+                UI: {
+                    initSmoothScrolling: function() {
+                        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                            anchor.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                                    behavior: 'smooth'
+                                });
+                            });
+                        });
+                    },
+
+                    initIntersectionObserver: function() {
+                        const observerOptions = {
+                            root: null,
+                            rootMargin: '0px',
+                            threshold: 0.1
+                        };
+
+                        const observer = new IntersectionObserver((entries, observer) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.style.opacity = '1';
+                                    entry.target.style.transform = 'translateY(0) scale(1)';
+                                    entry.target.style.animation = 'fadeInScale 0.8s ease-out forwards';
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        }, observerOptions);
+
+                        document.querySelectorAll('.produto-card, .servico-card, .pagamento-card, .portfolio-item').forEach(card => {
+                            observer.observe(card);
+                        });
+                    },
+
+                    initializeRadioPlayerMessage: function() {
+                        const radioPlayerMessage = document.createElement('p');
+                        radioPlayerMessage.id = 'radioPlayerMessage';
+                        radioPlayerMessage.classList.add('radio-info-message');
+                        radioPlayerMessage.textContent = 'Use o seletor acima para ouvir.';
+                        document.getElementById('radioSelector').insertAdjacentElement('afterend', radioPlayerMessage);
+                    }
+                },
+
+                initRadioPlayer: function() {
+                    const radioSelector = document.getElementById('radioSelector');
+                    const playerContainer = document.getElementById('playerContainer');
+                    const radioPlayerMessage = document.getElementById('radioPlayerMessage');
+
+                    if (radioSelector && playerContainer && radioPlayerMessage) {
+                        radioSelector.addEventListener('change', function() {
+                            const selectedOption = this.options[this.selectedIndex];
+                            const url = selectedOption.value;
+                            const type = selectedOption.dataset.type; // 'audio' ou 'video'
+                            const name = selectedOption.textContent;
+
+                            if (url) {
+                                playerContainer.innerHTML = ''; // Limpa qualquer player anterior
+
+                                if (type === 'audio') {
+                                    const audioPlayer = document.createElement('audio');
+                                    audioPlayer.controls = true;
+                                    audioPlayer.autoplay = true;
+                                    audioPlayer.src = url;
+                                    playerContainer.appendChild(audioPlayer);
+                                    radioPlayerMessage.textContent = `Tocando: ${name}`;
+                                } else {
+                                    // Caso haja outros tipos no futuro
+                                    radioPlayerMessage.textContent = 'Formato de mídia não suportado.';
+                                }
+                            } else {
+                                playerContainer.innerHTML = '';
+                                radioPlayerMessage.textContent = 'Selecione uma rádio para tocar.';
+                            }
+                        });
+                    }
+                },
+
+                initVisitCounter: function() {
+                    const visitCounterElement = document.getElementById('visit-count');
+                    if (!visitCounterElement) {
+                        console.error("Elemento 'visit-count' não encontrado.");
+                        return;
+                    }
+
+                    const VISIT_COUNT_API_URL = 'https://www.droneshopmatinhos.com.br/visit_count.php';
+
+                    fetch(VISIT_COUNT_API_URL)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            // Check content type before parsing JSON
+                            const contentType = response.headers.get("content-type");
+                            if (contentType && contentType.indexOf("application/json") !== -1) {
+                                return response.json();
+                            } else {
+                                throw new Error("Resposta da API não é JSON. Conteúdo: " + contentType);
+                            }
+                        })
+                        .then(data => {
+                            if (data && typeof data.count !== 'undefined') {
+                                visitCounterElement.textContent = data.count;
+                            } else {
+                                console.warn("Resposta da API de visitas não contém 'count' ou está em formato inesperado.", data);
+                                visitCounterElement.textContent = "Dados ?";
+                                throw new Error("Formato de dados inesperado da API de visitas.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Erro detalhado ao buscar contador de visitas:", error.message);
+                            if (!navigator.onLine) {
+                                visitCounterElement.textContent = "Offline";
+                                console.error("Falha na conexão: Verifique sua internet.");
+                            } else if (error.message.startsWith('HTTP error!')) {
+                                // HTTP errors (4xx, 5xx)
+                                visitCounterElement.textContent = "Serviço Ind."; // Serviço Indisponível
+                                console.error("Erro HTTP ao buscar visitas:", error.message);
+                            } else if (error.message.toLowerCase().includes('failed to fetch')) {
+                                // Likely CORS or network issue not caught by navigator.onLine
+                                visitCounterElement.textContent = "Falha API";
+                                console.error("Falha ao buscar visitas: Pode ser um problema de CORS, DNS, ou o servidor está inacessível. Verifique o console do navegador (aba Network) para mais detalhes.");
+                            } else if (error.message.toLowerCase().includes('json') || error.message.toLowerCase().includes('unexpected token')) {
+                                // JSON parsing errors or if the server sent non-JSON
+                                visitCounterElement.textContent = "Dados Inv."; // Dados Inválidos
+                                console.error("Falha ao processar dados de visitas: Resposta do servidor não é JSON válido ou formato incorreto. ", error.message);
+                            } else {
+                                visitCounterElement.textContent = "Erro";
+                                console.error("Erro inesperado ao buscar contador de visitas:", error);
+                            }
+                        });
+                },
+
+                // Função para o botão de fechar do vídeo
+                initCloseVideo: function() {
+                    const videoContainer = document.getElementById('top-right-video-container');
+                    const closeButton = document.getElementById('close-video-button');
+                    if (closeButton && videoContainer) {
+                        closeButton.addEventListener('click', () => {
+                            videoContainer.classList.add('closing');
+                            setTimeout(() => {
+                                videoContainer.style.display = 'none';
+                                videoContainer.classList.remove('closing');
+                            }, 500);
+                        });
+                    }
+                },
+
+                init: function() {
+                    this.initVisitCounter();
+                    this.UI.initSmoothScrolling();
+                    this.UI.initIntersectionObserver();
+                    this.UI.initializeRadioPlayerMessage();
+                    this.initRadioPlayer();
+                    this.initCloseVideo(); // Chamar a função de fechar o vídeo
+                }
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', App.init.bind(App));
+            } else {
+                App.init();
+            }
+        });
+
+        // JavaScript – Buscando dados Open-Meteo para o widget do clima
+        async function atualizaClimaMatinhos() {
+            // Matinhos, PR: latitude -25.8231, longitude -48.5486
+            const weatherBox = document.getElementById('weather-matinhos');
+            if (!weatherBox) return;
+            try {
+                const lat = -25.8231, lon = -48.5486;
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+                const resp = await fetch(url);
+                const data = await resp.json();
+                if (data.current_weather) {
+                    const temp = Math.round(data.current_weather.temperature);
+                    const code = data.current_weather.weathercode;
+                    const codeDescMap = {
+                        0:  ['Céu limpo',             'sun'],
+                        1:  ['Principalmente limpo',  'cloud-sun'],
+                        2:  ['Parcialmente nublado',  'cloud-sun'],
+                        3:  ['Nublado',               'cloud'],
+                        45: ['Névoa',                 'smog'],
+                        48: ['Nevoeiro gelado',       'smog'],
+                        51: ['Garoa fraca',           'cloud-rain'],
+                        53: ['Garoa moderada',        'cloud-showers-heavy'],
+                        55: ['Garoa densa',           'cloud-showers-heavy'],
+                        61: ['Chuva fraca',           'cloud-rain'],
+                        63: ['Chuva',                 'cloud-showers-heavy'],
+                        65: ['Chuva forte',           'cloud-showers-heavy'],
+                        71: ['Neve fraca',            'snowflake'],
+                        73: ['Neve',                  'snowflake'],
+                        75: ['Neve forte',            'snowflake'],
+                        80: ['Pancada isolada',       'cloud-sun-rain'],
+                        81: ['Pancada moderada',      'cloud-sun-rain'],
+                        82: ['Pancada forte',         'cloud-showers-heavy'],
+                        95: ['Trovoada',              'cloud-bolt'],
+                        96: ['Trovoada leve',         'cloud-bolt'],
+                        99: ['Trovoada severa',       'cloud-bolt'],
+                    };
+                    const [desc, icon] = (codeDescMap[code] || ['Sem dado','sun']);
+                    // Atualiza HTML:
+                    weatherBox.querySelector('.clima-temp').textContent = temp;
+                    weatherBox.querySelector('.clima-desc').textContent = "· " + desc;
+                    weatherBox.querySelector('.clima-icon').innerHTML =
+                        `<i class="fas fa-${icon}" title="${desc}" style="color:#FFD700;"></i>`;
+                } else {
+                    weatherBox.querySelector('.clima-info').textContent = "Clima não disponível";
+                }
+            } catch(e){
+                if(weatherBox) weatherBox.querySelector('.clima-info').textContent = "Erro ao buscar clima.";
+            }
+        }
+        // Chama assim que carrega:
+        document.addEventListener('DOMContentLoaded', atualizaClimaMatinhos);
+        // E também a cada 12 minutos:
+        setInterval(atualizaClimaMatinhos, 12 * 60 * 1000);
+    </script>
+</body>
+</html>
