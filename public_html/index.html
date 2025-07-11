@@ -1178,6 +1178,76 @@ DJI Mini, Air, Mavic e mais!">
 </head>
 <body>
     <div class="construction-banner">
+		<title>Barra de Notícias</title>
+    <style>
+        body {
+            margin-top: 6cm; /* Reservar espaço para a barra */
+            font-family: Arial, sans-serif;
+        }
+        .news-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6cm;
+            background-color: #1A1A3A;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 9999;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .news-content {
+            white-space: nowrap;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="news-bar">
+    <div class="news-content" id="news-content">
+        <!-- Notícias em tempo real serão inseridas aqui -->
+    </div>
+</div>
+
+<script>
+    async function fetchNews() {
+        try {
+            const apiKey = 'e70fb188c902487088e723527eeb72b9';
+            const newsApiUrl = `https://newsapi.org/v2/top-headlines?country=br&apiKey=${apiKey}`;
+            const response = await fetch(newsApiUrl);
+            const data = await response.json();
+
+            let newsContent = '';
+            if (data.articles && data.articles.length > 0) {
+                data.articles.forEach(article => {
+                    const title = article.title || 'Sem título';
+                    const description = article.description || 'Sem descrição';
+                    newsContent += `| ${title} - ${description} `;
+                });
+            } else {
+                newsContent = 'Nenhuma notícia encontrada no momento.';
+            }
+            document.getElementById('news-content').innerText = newsContent;
+        } catch (error) {
+            console.error('Erro ao buscar as notícias:', error);
+        }
+    }
+
+    fetchNews();
+    setInterval(fetchNews, 300000); // Atualiza as notícias a cada 5 minutos
+</script>
         <p>🚧 Site em construção e otimização!
  Algumas funcionalidades podem estar indisponíveis ou em teste. 🚧</p>
     </div>
@@ -1241,15 +1311,26 @@ DJI Mini, Air, Mavic e mais!">
         </section>
 <section id="produtos">
             <h2>Nossos ProdutoS</h2>
-
+            <video
+    width="100%"
+    height="auto"
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="metadata"
+    controlsList="nodownload nofullscreen"
+    poster="drone-thumbnail.jpg"
+    title="Vídeo do Drone Racing"
+>
+    <source src="drone.mp4" type="video/mp4">
+    Seu navegador não suporta a tag de vídeo.
+</video>
             <div class="produtos-grid">
                 <div class="produto-card">
                     <i class="fas fa-drone-alt produto-img"></i>
                     <h3>Drone Racing&nbsp;</h3>
-                    <video width="90%" height="auto" autoplay loop muted playsinline controls preload="metadata" loading="lazy" poster="images/drone-poster-placeholder.jpg">
-                <source src="drone.mp4" type="video/mp4">
-                Seu navegador não suporta a tag de vídeo.
-            </video>
+
                     <p>Compacto, leve e com câmera. Ideal para iniciantes e profissionais.</p>
                     <span class="preco">R$ 350,00</span>
                     <button class="btn-comprar">Comprar Agora</button>
