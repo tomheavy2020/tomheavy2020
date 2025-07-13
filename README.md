@@ -1,24 +1,14 @@
-- 👋 Hi, I’m @tomheavy2020
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+# Drone Shop Matinhos
 
-<!---
-tomheavy2020/tomheavy2020 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
-<!DOCTYPE html>
-<html>
-<body>
+This is the code for the Drone Shop Matinhos website.
 
-<h1>The script element</h1>
+## How to use the website
 
-<p id="demo"></p>
+To use the website, you just need to open the `index.html` file in your browser.
 
-<script>
-document.getElementById("demo").innerHTML = "Hello JavaScript!";
-</script> 
+When you click on the "Comprar Agora" button for the F-198 drone, you will be redirected to the Mercado Pago payment page.
 
-</body>
-</html>
+To add payment links for the other products, you will need to:
+
+1.  Create a payment link for each product in your Mercado Pago dashboard.
+2.  Add an `if` statement to the `payment.js` file for each product, similar to the one for the F-198 drone.
