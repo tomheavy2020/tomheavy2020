@@ -1,218 +1,424 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&display=swap');
+
+* {
   margin: 0;
-  background: #181829;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#tv-container {
-  position: fixed;
-  top: 32px;
-  left: 32px;
-  z-index: 9999;
-}
-
-.tv-retro {
-  position: relative;
-  width: 250px;
-  height: 200px;
-  background: linear-gradient(135deg, #8e7b6b 65%, #6c5641 98%);
-  border-radius: 30px 30px 48px 48px / 23px 23px 42px 42px;
-  box-shadow: 0 14px 48px #000b, 0 9px 30px 0px #674e3333 inset;
-  overflow: visible;
-  border: 6px solid #442514;
-  padding-top: 35px;
-}
-
-.tv-antenna {
-  position: absolute;
-  left: 50%;
-  top: -34px;
-  width: 84px;
-  height: 36px;
-  z-index: 10;
+body {
+  font-family: 'VT323', monospace;
+  background: #2c1810;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: hidden;
 }
 
-.tv-antenna-bar {
-  width: 36px;
-  height: 36px;
-  border-top: 3px solid #d3cbc4;
-  border-radius: 80px 80px 0 0;
-  background: none;
-}
-
-.tv-antenna-knob {
-  position: absolute;
-  left: 36px;
-  top: -7px;
-  width: 12px;
-  height: 12px;
-  background: #e7ded6;
-  border-radius: 50%;
-  border: 2.5px solid #baa484;
-  z-index: 12;
-}
-
-.tv-screencover {
-  position: absolute;
-  left: 20px;
-  top: 40px;
-  width: 162px;
-  height: 120px;
-  background: linear-gradient(120deg,#10151d 70%, #333947 100%);
-  border-radius: 23px 25px 23px 28px/20px 20px 30px 29px;
-  border: 10px solid #272223;
-  box-shadow:
-     0 0 0 2px #c7b193,
-     0 0 16px 4px #2b1403bb inset,
-     0 12px 24px -12px #674e33bb inset;
-  overflow: hidden;
-  filter: drop-shadow(0px 2px 5px #000c);
-}
-
-/* simulação da curvatura/tubo CRT */
-.crt-curve {
-  position: absolute;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  border-radius: inherit;
-  background: radial-gradient(ellipse 75% 60% at 55% 55%,
-    rgba(255,255,255,0.10) 0%,
-    rgba(255,255,255,0.03) 33%,
-    transparent 100%);
-  z-index: 11;
-}
-.crt-glare {
-  position: absolute;
-  left: 14px; top: 16px;
-  width: 50px; height: 25px;
-  background: linear-gradient(110deg,rgba(255,255,255,0.19) 80%,transparent);
-  border-radius: 30px 45px 38px 25px/22px 27px 26px 16px;
-  pointer-events: none;
-  z-index: 12;
-  filter: blur(.5px);
-}
-
-/* scanlines efeito */
-.crt-scanlines {
-  position: absolute;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 13;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0 2px,
-    rgba(0,0,0,0.09) 2px 4px
-  );
-}
-
-iframe.tv-screen {
-  position: relative;
-  left: 0;
+.room {
+  position: fixed;
   top: 0;
-  width: 100%; height: 100%;
-  border: none;
-  border-radius: inherit;
-  filter: contrast(1.03) brightness(.92) saturate(.82);
-  background: #000;
-  z-index: 10;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #3a2818 0%, #1a0f08 100%);
+  z-index: -1;
 }
 
-/* Moldura lateral com textura/parafusos */
-.tv-deco {
+.tv-set {
+  position: relative;
+  width: 800px;
+  max-width: 95vw;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+}
+
+/* Gabinete da TV */
+.tv-cabinet {
+  background: linear-gradient(to bottom, #8b6f47 0%, #5c4a31 50%, #4a3825 100%);
+  border-radius: 30px;
+  padding: 40px;
+  position: relative;
+  box-shadow:
+    inset 0 5px 10px rgba(255,255,255,0.2),
+    inset 0 -5px 10px rgba(0,0,0,0.5),
+    0 10px 30px rgba(0,0,0,0.5);
+  border: 3px solid #3a2818;
+}
+
+/* Textura de madeira */
+.tv-cabinet::before {
+  content: '';
   position: absolute;
-  top: 58px;
-  right: 17px;
-  width: 48px;
-  height: 92px;
-  background: linear-gradient(120deg,#a48c68 68%,#bfa781 100%);
-  border-radius: 14px;
-  box-shadow: 0 3px 8px #452e1240 inset;
-  border: 2.7px solid #624e29;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.1) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0,0,0,0.1) 3px
+    );
+  border-radius: 27px;
+  pointer-events: none;
+}
+
+/* Tela CRT */
+.tv-screen-container {
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  box-shadow:
+    inset 0 0 50px rgba(0,0,0,0.8),
+    inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.tv-screen {
+  width: 100%;
+  height: 400px;
+  background: #000;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,0.9),
+    inset 0 0 100px rgba(0,255,0,0.1);
+}
+
+/* Efeito de tela CRT curvada */
+.tv-screen::before {
+  content: '';
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  right: -5%;
+  bottom: -5%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Scanlines */
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0,255,0,0.03),
+    rgba(0,255,0,0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+
+/* Estática */
+.static {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0, rgba(255,255,255,0.05) 1px, transparent 2px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+  display: none;
+}
+
+.static.show {
+  display: block;
+  animation: static-noise 0.2s infinite;
+}
+
+@keyframes static-noise {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* Conteúdo do canal */
+.tv-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.tv-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.no-signal {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  justify-content: space-between;
-  padding: 12px 3px;
-}
-.tv-parafuso {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: linear-gradient(120deg, #f6eece 60%, #7e633a 100%);
-  border: 2px solid #776246;
-  margin: 2px;
-  box-shadow: 1px 0 2px #664e2a44;
-}
-
-/* Botões */
-.tv-botao-redondo {
-  width: 24px; height: 24px;
-  background: radial-gradient(ellipse at 25% 22%, #f47636 60%, #b4410d 100%);
-  border-radius: 50%;
-  border: 3px solid #705234;
-  margin-top: 6px;
-  box-shadow: 0 2px 4px #a22d0b44 inset;
-}
-.tv-botao-redondo.blue {
-  background: radial-gradient(ellipse at 30% 28%, #7fc5f9 60%, #3450b4 100%);
-}
-
-/* Base/pés de madeira */
-.tv-pe {
-  position: absolute;
-  left: 24px;
-  bottom: -22px;
-  width: 70px;
-  height: 18px;
-  background: linear-gradient(90deg,#bca378 70%,#98824c 100%);
-  border-radius: 14px 18px 28px 18px / 16px 15px 16px 16px;
-  border: 4px solid #6b5640;
-  box-shadow: 0 8px 28px #2b140384;
-}
-
-.tv-pe.dir {
-  left: unset;
-  right: 24px;
-}
-
-.tv-nome {
-  position: absolute;
-  left: 0; right: 0;
-  top: 7px;
-  font-family: 'Share Tech Mono', monospace, Arial, sans-serif;
-  color: #fdebc0;
-  font-size: .98rem;
+  justify-content: center;
+  height: 100%;
+  color: #0f0;
   text-align: center;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 13px #261a097c, 0 1px 0 #533202;
-  font-weight: bold;
+  font-size: 2em;
+  text-shadow: 0 0 10px #0f0;
 }
 
-/* Botão fechar retrô */
-.close-button {
-  position: absolute;
-  top: 8px;
-  right: 13px;
-  z-index: 40;
-  background: #ec9b1c;
-  border: 2px solid #5c4115;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-weight: bolder;
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  text-shadow: 0 1px 6px #b02;
-  box-shadow: 0 3px 8px #a577373c inset;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.20s, color 0.2s;
+/* Painel de controle */
+.control-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding: 0 20px;
 }
-.close-button:hover {
-  background: #bf2525;
-  color: #fff9bc;
-  border-color: #9b0000;
+
+/* Botões de controle */
+.control-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #4a3825 0%, #2a1810 100%);
+  border: 3px solid #1a0f08;
+  box-shadow:
+    0 5px 10px rgba(0,0,0,0.5),
+    inset 0 -2px 5px rgba(0,0,0,0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: #8b6f47;
+  transition: all 0.1s;
+}
+
+.control-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 5px rgba(0,0,0,0.5),
+    inset 0 -1px 3px rgba(0,0,0,0.5);
+}
+
+.volume-knob {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 30% 30%, #6b5437, #3a2818);
+  border-radius: 50%;
+  position: relative;
+  box-shadow:
+    0 5px 15px rgba(0,0,0,0.5),
+    inset 0 -2px 5px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.volume-knob .volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.volume-knob .volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #ff3333;
+  border-radius: 50%;
+  border: 2px solid #1a0f08;
+}
+
+.volume-knob .volume-slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: #ff3333;
+  border-radius: 50%;
+  border: 2px solid #1a0f08;
+}
+
+/* Display do canal */
+.channel-display {
+  background: #1a0f08;
+  border: 2px solid #0a0500;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: #ff3333;
+  font-family: 'VT323', monospace;
+  font-size: 2em;
+  text-shadow: 0 0 5px #ff3333;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Logo da marca */
+.tv-brand {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5em;
+  color: #8b6f47;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  letter-spacing: 2px;
+}
+
+/* Grade de ventilação */
+.speaker-grille {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  width: 150px;
+  height: 60px;
+  background: repeating-linear-gradient(
+    0deg,
+    #3a2818 0px,
+    #3a2818 3px,
+    #1a0f08 3px,
+    #1a0f08 6px
+  );
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Lista de canais */
+.channel-list {
+  margin-top: 40px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 800px;
+}
+
+.channel-list h2 {
+  color: #d4af37;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.channel-btn {
+  background: linear-gradient(to bottom, #4a3825 0%, #2a1810 100%);
+  border: 2px solid #1a0f08;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #d4af37;
+  text-align: center;
+  font-size: 1.2em;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.channel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  background: linear-gradient(to bottom, #5c4a31 0%, #3a2818 100%);
+}
+
+.channel-btn.active {
+  background: linear-gradient(to bottom, #d4af37 0%, #b8941f 100%);
+  color: #1a0f08;
+}
+
+/* Pés da TV */
+.tv-legs {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 100px;
+  margin-top: -10px;
+}
+
+.tv-leg {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(to bottom, #3a2818 0%, #1a0f08 100%);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+  .tv-set {
+    width: 100%;
+  }
+  .tv-screen {
+    height: 300px;
+  }
+  .control-panel {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .tv-legs {
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tv-screen {
+    height: 200px;
+  }
+  .control-buttons {
+    gap: 10px;
+  }
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+  .volume-knob {
+    width: 50px;
+    height: 50px;
+  }
+  .channel-display {
+    font-size: 1.5em;
+    padding: 5px 10px;
+  }
+  .tv-brand {
+    font-size: 1.2em;
+  }
+  .speaker-grille {
+    width: 100px;
+    height: 40px;
+  }
+  .channels-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
 }
