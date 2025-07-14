@@ -1,0 +1,218 @@
+body {
+  margin: 0;
+  background: #181829;
+}
+
+#tv-container {
+  position: fixed;
+  top: 32px;
+  left: 32px;
+  z-index: 9999;
+}
+
+.tv-retro {
+  position: relative;
+  width: 250px;
+  height: 200px;
+  background: linear-gradient(135deg, #8e7b6b 65%, #6c5641 98%);
+  border-radius: 30px 30px 48px 48px / 23px 23px 42px 42px;
+  box-shadow: 0 14px 48px #000b, 0 9px 30px 0px #674e3333 inset;
+  overflow: visible;
+  border: 6px solid #442514;
+  padding-top: 35px;
+}
+
+.tv-antenna {
+  position: absolute;
+  left: 50%;
+  top: -34px;
+  width: 84px;
+  height: 36px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tv-antenna-bar {
+  width: 36px;
+  height: 36px;
+  border-top: 3px solid #d3cbc4;
+  border-radius: 80px 80px 0 0;
+  background: none;
+}
+
+.tv-antenna-knob {
+  position: absolute;
+  left: 36px;
+  top: -7px;
+  width: 12px;
+  height: 12px;
+  background: #e7ded6;
+  border-radius: 50%;
+  border: 2.5px solid #baa484;
+  z-index: 12;
+}
+
+.tv-screencover {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  width: 162px;
+  height: 120px;
+  background: linear-gradient(120deg,#10151d 70%, #333947 100%);
+  border-radius: 23px 25px 23px 28px/20px 20px 30px 29px;
+  border: 10px solid #272223;
+  box-shadow:
+     0 0 0 2px #c7b193,
+     0 0 16px 4px #2b1403bb inset,
+     0 12px 24px -12px #674e33bb inset;
+  overflow: hidden;
+  filter: drop-shadow(0px 2px 5px #000c);
+}
+
+/* simulação da curvatura/tubo CRT */
+.crt-curve {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 75% 60% at 55% 55%,
+    rgba(255,255,255,0.10) 0%,
+    rgba(255,255,255,0.03) 33%,
+    transparent 100%);
+  z-index: 11;
+}
+.crt-glare {
+  position: absolute;
+  left: 14px; top: 16px;
+  width: 50px; height: 25px;
+  background: linear-gradient(110deg,rgba(255,255,255,0.19) 80%,transparent);
+  border-radius: 30px 45px 38px 25px/22px 27px 26px 16px;
+  pointer-events: none;
+  z-index: 12;
+  filter: blur(.5px);
+}
+
+/* scanlines efeito */
+.crt-scanlines {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 13;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(0,0,0,0.09) 2px 4px
+  );
+}
+
+iframe.tv-screen {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%; height: 100%;
+  border: none;
+  border-radius: inherit;
+  filter: contrast(1.03) brightness(.92) saturate(.82);
+  background: #000;
+  z-index: 10;
+}
+
+/* Moldura lateral com textura/parafusos */
+.tv-deco {
+  position: absolute;
+  top: 58px;
+  right: 17px;
+  width: 48px;
+  height: 92px;
+  background: linear-gradient(120deg,#a48c68 68%,#bfa781 100%);
+  border-radius: 14px;
+  box-shadow: 0 3px 8px #452e1240 inset;
+  border: 2.7px solid #624e29;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 12px 3px;
+}
+.tv-parafuso {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, #f6eece 60%, #7e633a 100%);
+  border: 2px solid #776246;
+  margin: 2px;
+  box-shadow: 1px 0 2px #664e2a44;
+}
+
+/* Botões */
+.tv-botao-redondo {
+  width: 24px; height: 24px;
+  background: radial-gradient(ellipse at 25% 22%, #f47636 60%, #b4410d 100%);
+  border-radius: 50%;
+  border: 3px solid #705234;
+  margin-top: 6px;
+  box-shadow: 0 2px 4px #a22d0b44 inset;
+}
+.tv-botao-redondo.blue {
+  background: radial-gradient(ellipse at 30% 28%, #7fc5f9 60%, #3450b4 100%);
+}
+
+/* Base/pés de madeira */
+.tv-pe {
+  position: absolute;
+  left: 24px;
+  bottom: -22px;
+  width: 70px;
+  height: 18px;
+  background: linear-gradient(90deg,#bca378 70%,#98824c 100%);
+  border-radius: 14px 18px 28px 18px / 16px 15px 16px 16px;
+  border: 4px solid #6b5640;
+  box-shadow: 0 8px 28px #2b140384;
+}
+
+.tv-pe.dir {
+  left: unset;
+  right: 24px;
+}
+
+.tv-nome {
+  position: absolute;
+  left: 0; right: 0;
+  top: 7px;
+  font-family: 'Share Tech Mono', monospace, Arial, sans-serif;
+  color: #fdebc0;
+  font-size: .98rem;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 13px #261a097c, 0 1px 0 #533202;
+  font-weight: bold;
+}
+
+/* Botão fechar retrô */
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 13px;
+  z-index: 40;
+  background: #ec9b1c;
+  border: 2px solid #5c4115;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-weight: bolder;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  text-shadow: 0 1px 6px #b02;
+  box-shadow: 0 3px 8px #a577373c inset;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.20s, color 0.2s;
+}
+.close-button:hover {
+  background: #bf2525;
+  color: #fff9bc;
+  border-color: #9b0000;
+}
