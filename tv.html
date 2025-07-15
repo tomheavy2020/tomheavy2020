@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Matinhos TV</title>
+    <link rel="stylesheet" href="tv.css">
+</head>
+<body>
+  <div class="room"></div>
+
+  <div class="tv-set">
+    <div class="tv-cabinet">
+      <div class="tv-screen-container">
+        <div class="tv-screen" id="tv-screen">
+          <div class="scanlines"></div>
+          <div class="static" id="static"></div>
+          <div class="tv-content" id="tv-content">
+            <div class="no-signal">
+              <div style="font-size: 3em;">📺</div>
+              <div>SEM SINAL</div>
+              <div style="font-size: 0.5em; margin-top: 10px;">SELECIONE UM CANAL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-panel">
+        <div class="control-buttons">
+          <button class="control-btn" onclick="mudarCanal(-1)">◀</button>
+          <button class="control-btn" onclick="ligarDesligar()">⏻</button>
+          <button class="control-btn" onclick="mudarCanal(1)">▶</button>
+        </div>
+
+        <div class="channel-display" id="channel-display">--</div>
+
+        <div class="volume-knob" title="Volume"></div>
+      </div>
+
+      <div class="speaker-grille"></div>
+      <div class="tv-brand">RETRO TV</div>
+    </div>
+
+    <div class="tv-legs">
+      <div class="tv-leg"></div>
+      <div class="tv-leg"></div>
+    </div>
+
+    <div class="channel-list">
+      <h2>📡 CANAIS DISPONÍVEIS</h2>
+      <div class="channels-grid" id="channels-grid"></div>
+    </div>
+  </div>
+  <script src="tv.js"></script>
+</body>
+</html>
